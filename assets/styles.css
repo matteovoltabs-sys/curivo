@@ -375,17 +375,18 @@ summary{cursor:pointer; font-weight:900; color:var(--navy)}
 }
 
 @media (max-width:768px){
-  .nav{display:none}
-  .hero-grid{grid-template-columns:1fr}
-  .trust-badges{grid-template-columns:1fr}
-  .ba-grid{grid-template-columns:1fr}
-  .service-grid{grid-template-columns:1fr}
-  .why-grid{grid-template-columns:1fr}
-  .journey{grid-template-columns:1fr}
-  .testi-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr; text-align:center}
-  .topbar-inner{padding:6px 0;
-                .brand-logo{height:56px;
+  .nav{display:none;}
+  .hero-grid{grid-template-columns:1fr;}
+  .trust-badges{grid-template-columns:1fr;}
+  .ba-grid{grid-template-columns:1fr;}
+  .service-grid{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr;}
+  .journey{grid-template-columns:1fr;}
+  .testi-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr; text-align:center;}
+
+  .topbar-inner{padding:6px 0;}
+  .brand-logo{height:46px; max-width:190px;}
 }
 
 }
@@ -623,6 +624,7 @@ font-size:18px;
 }
 
 }
+
 
 
 
