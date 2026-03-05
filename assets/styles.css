@@ -47,67 +47,60 @@ a{color:inherit;text-decoration:none}
 }
 
 .topbar{
-  position:sticky;
-  top:0;
-  background:white;
-  border-bottom:1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
   box-shadow: 0 8px 18px rgba(15,23,42,0.05);
-  z-index:1000;
-  margin-bottom:12px;
+  z-index: 1000;
+  margin-bottom: 12px;
 }
 
-}
 .topbar-inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:16px;
-  padding:8px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0;
   flex-wrap: nowrap;
 }
+
 .brand{
-  display:flex;
-  align-items:center;
-  text-decoration:none;
-}
-.brand{
-  display:flex;
-  align-items:center;
-  text-decoration:none;
-}
-
-.nav{display:flex; gap:16px; align-items:center; color:var(--muted); font-weight:700; font-size:14px;}
-.nav a{padding:8px 10px; border-radius: 12px;}
-.nav a:hover{background:#fff; color:var(--text);}
-
-.topbar-cta{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-@media (max-width: 768px){
-
-  .topbar-inner{
-    padding:6px 0;
-  }
-
+  display: flex;
+  align-items: center;
+  text-decoration: none;
 }
 
 .brand-logo{
-  height:80px;
-  width:auto;
-  display:block;
+  height: 56px;       /* 80px è tanto per una topbar */
+  width: auto;
+  display: block;
   max-width: 220px;
 }
-.brand{
-  display:flex;
-  align-items:center;
-}
-  .topbar-cta .btn{
-    padding:10px 14px;
-    font-size:14px;
-  }
 
+.nav{
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 14px;
+}
+.nav a{ padding: 8px 10px; border-radius: 12px; }
+.nav a:hover{ background:#fff; color: var(--text); }
+
+.topbar-cta{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.topbar-cta .btn{ white-space: nowrap; }
+
+@media (max-width: 768px){
+  .nav{ display:none; }
+  .topbar-inner{ padding: 6px 0; gap: 10px; }
+  .brand-logo{ height: 46px; max-width: 190px; }
+  .topbar-cta .btn{ padding: 10px 12px; font-size: 14px; border-radius: 12px; }
 }
 
 .hero{
@@ -620,6 +613,7 @@ font-size:18px;
     #form{ scroll-margin-top: 100px; }
 
 }
+
 
 
 
