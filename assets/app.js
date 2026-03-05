@@ -63,5 +63,65 @@ document.getElementById("popup").style.display="block";
 document.getElementById("closePopup").onclick=function(){
 document.getElementById("popup").style.display="none";
 };
+  // ===== Before/After slider (per ogni slide) =====
+document.querySelectorAll(".ba").forEach((wrap) => {
+  const range = wrap.querySelector(".ba-range");
+  const afterWrap = wrap.querySelector(".ba-after-wrap");
+  const handle = wrap.querySelector(".ba-handle");
+
+  const set = (v) => {
+    afterWrap.style.clipPath = `inset(0 0 0 ${v}%)`;
+    handle.style.left = `${v}%`;
+  };
+
+  set(range.value);
+  range.addEventListener("input", (e) => set(e.target.value));
+});
+
+// ===== Carousel navigation =====
+(function(){
+  const track = document.getElementById("baTrack");
+  const dotsWrap = document.getElementById("baDots");
+  if(!track || !dotsWrap) return;
+
+  const slides = Array.from(track.querySelectorAll(".ba-slide"));
+  let index = 0;
+
+  // Create dots
+  slides.forEach((_, i) => {
+    const b = document.createElement("button");
+    b.className = "ba-dot" + (i===0 ? " active" : "");
+    b.type = "button";
+    b.setAttribute("aria-label", `Vai alla slide ${i+1}`);
+    b.addEventListener("click", () => goTo(i));
+    dotsWrap.appendChild(b);
+  });
+
+  const dots = Array.from(dotsWrap.querySelectorAll(".ba-dot"));
+
+  function goTo(i){
+    index = Math.max(0, Math.min(i, slides.length - 1));
+    slides[index].scrollIntoView({ behavior:"smooth", inline:"start", block:"nearest" });
+    dots.forEach((d, di) => d.classList.toggle("active", di === index));
+  }
+
+  document.querySelector(".ba-nav.prev")?.addEventListener("click", () => goTo(index - 1));
+  document.querySelector(".ba-nav.next")?.addEventListener("click", () => goTo(index + 1));
+
+  // Update index on scroll (best effort)
+  track.addEventListener("scroll", () => {
+    const left = track.scrollLeft;
+    let best = 0, bestDist = Infinity;
+    slides.forEach((s, i) => {
+      const dist = Math.abs(s.offsetLeft - left);
+      if(dist < bestDist){ bestDist = dist; best = i; }
+    });
+    if(best !== index){
+      index = best;
+      dots.forEach((d, di) => d.classList.toggle("active", di === index));
+    }
+  }, { passive:true });
+})();
 
 });
+
