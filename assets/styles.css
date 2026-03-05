@@ -576,6 +576,19 @@ font-size:18px;
   font-weight:700;
   color: var(--navy);
 }
+  @media (max-width:768px){
+
+  .trust-badges{
+    gap:8px;
+  }
+
+  .trust-badge{
+    font-size:13px;
+    padding:6px 12px;
+  }
+
+}
+
 
 
 
