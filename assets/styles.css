@@ -89,7 +89,13 @@ a{color:inherit;text-decoration:none}
 }
 
 .brand-logo{
-  height:72px;
+  height:80px;
+  width:auto;
+  display:block;
+}
+.brand{
+  display:flex;
+  align-items:center;
 }
   .topbar-cta .btn{
     padding:10px 14px;
@@ -354,7 +360,7 @@ summary{cursor:pointer; font-weight:900; color:var(--navy)}
   border: 1px solid rgba(255,255,255,.5);
 }
 
-@media (max-width: 980px){
+@media (max-width:768px){
   .nav{display:none}
   .hero-grid{grid-template-columns:1fr}
   .trust-badges{grid-template-columns:1fr}
@@ -364,6 +370,9 @@ summary{cursor:pointer; font-weight:900; color:var(--navy)}
   .journey{grid-template-columns:1fr}
   .testi-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr; text-align:center}
+  .topbar-inner{padding:6px 0;
+                .brand-logo{height:56px;
+}
 
 }
 
@@ -409,6 +418,7 @@ right:15px;
 cursor:pointer;
 font-size:18px;
 }
+
 
 
 
