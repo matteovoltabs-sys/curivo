@@ -189,6 +189,16 @@ h1{
   color:var(--muted);
   font-weight:600;
 }
+.hero-card-head::after{
+  content:"";
+  display:block;
+  width:40px;
+  height:3px;
+  margin-top:12px;
+  border-radius:2px;
+  background:linear-gradient(90deg,var(--blue),var(--teal));
+  opacity:.6;
+}
 
 .form{padding: 14px 16px 16px; display:grid; gap:12px;}
 label span{display:block; font-size:13px; font-weight:900; color:var(--navy); margin-bottom:6px;}
@@ -985,6 +995,7 @@ textarea{
   .hero-card-head{ padding: 16px 16px 14px; }
   .form{ padding: 16px 16px 18px; }
 }
+
 
 
 
