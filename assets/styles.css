@@ -163,18 +163,32 @@ h1{
 
 .hero-card{
   background:#fff;
-  border:1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  border:1px solid rgba(226,232,240,.8);
+  border-radius:22px;
+  box-shadow:0 25px 70px rgba(15,23,42,.12);
   overflow:hidden;
 }
 .hero-card-head{
-  padding: 16px 16px 12px;
-  border-bottom:1px solid var(--border);
-  background: linear-gradient(180deg, rgba(60,180,160,.10), rgba(255,255,255,0));
+  padding:18px 20px 16px;
+  border-bottom:1px solid rgba(226,232,240,.8);
+  background: linear-gradient(
+    135deg,
+    rgba(60,180,160,.12),
+    rgba(40,120,160,.08)
+  );
 }
-.hero-card-title{font-weight:900; color:var(--navy); font-size:18px;}
-.hero-card-sub{color:var(--muted); font-weight:700; font-size:13px; margin-top:2px;}
+.hero-card-title{
+  font-weight:900;
+  color:var(--navy);
+  font-size:20px;
+  letter-spacing:-0.01em;
+}
+.hero-card-sub{
+  color:var(--muted);
+  font-weight:600;
+  font-size:13px;
+  margin-top:4px;
+}
 
 .form{padding: 14px 16px 16px; display:grid; gap:12px;}
 label span{display:block; font-size:13px; font-weight:900; color:var(--navy); margin-bottom:6px;}
@@ -811,6 +825,7 @@ html{
 #form{
   scroll-margin-top:100px;
 }
+
 
 
 
