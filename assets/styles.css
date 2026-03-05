@@ -63,6 +63,7 @@ a{color:inherit;text-decoration:none}
   justify-content:space-between;
   gap:16px;
   padding:8px 0;
+  flex-wrap: nowrap;
 }
 .brand{
   display:flex;
@@ -96,6 +97,7 @@ a{color:inherit;text-decoration:none}
   height:80px;
   width:auto;
   display:block;
+  max-width: 220px;
 }
 .brand{
   display:flex;
@@ -588,6 +590,7 @@ font-size:18px;
   }
 
 }
+
 
 
 
