@@ -194,6 +194,13 @@ input,textarea,select{
   background:#fff;
   outline:none;
 }
+html {
+  scroll-behavior: smooth;
+}
+
+#form {
+  scroll-margin-top: 100px;
+}
 input:focus,textarea:focus,select:focus{
   border-color: rgba(60,180,160,.7);
   box-shadow: 0 0 0 6px rgba(60,180,160,.14);
@@ -616,6 +623,7 @@ font-size:18px;
 }
 
 }
+
 
 
 
