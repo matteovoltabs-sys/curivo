@@ -55,4 +55,13 @@ form.addEventListener("submit", async (e) => {
   } catch (err) {
     setMsg("err", "Errore nell'invio. Riprova o scrivici su WhatsApp.");
   }
+
+  setTimeout(function(){
+document.getElementById("popup").style.display="block";
+},15000);
+
+document.getElementById("closePopup").onclick=function(){
+document.getElementById("popup").style.display="none";
+};
+
 });
