@@ -611,8 +611,12 @@ font-size:18px;
   }
 }
     #form{ scroll-margin-top: 100px; }
+    html {
+  scroll-behavior: smooth;
+}
 
 }
+
 
 
 
