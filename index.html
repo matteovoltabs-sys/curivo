@@ -3,8 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Curivo — Cure mediche all’estero</title>
-  <meta name="description" content="Curivo ti guida nel percorso di cure mediche all’estero: preventivo indicativo, cliniche selezionate, assistenza in italiano e supporto viaggio su richiesta." />
+
+  <title>Cure dentali all’estero | Preventivo gratuito | Curivo</title>
+  <meta name="description" content="Curivo ti guida nel percorso di cure dentali all’estero: preventivo indicativo, cliniche selezionate, assistenza in italiano e supporto viaggio su richiesta." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://curivo.pages.dev/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cure dentali all’estero | Preventivo gratuito | Curivo" />
+  <meta property="og:description" content="Preventivo indicativo, cliniche selezionate, assistenza in italiano e supporto viaggio su richiesta." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://curivo.pages.dev/" />
 
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico">
@@ -18,35 +27,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/assets/styles.css" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "Curivo",
+    "url": "https://curivo.pages.dev/",
+    "description": "Servizio informativo per preventivi di cure dentali all’estero con cliniche selezionate.",
+    "areaServed": "IT",
+    "availableLanguage": "Italian"
+  }
+  </script>
 </head>
 
 <body>
   <!-- Topbar -->
   <header class="topbar">
-  <div class="topbar-inner container">
-    <a href="/" class="brand">
-      <img src="/curivo_logo_header.png" class="brand-logo">
-    </a>
+    <div class="topbar-inner container">
+      <a href="/" class="brand" aria-label="Curivo Home">
+        <img src="/curivo_logo_header.png" class="brand-logo" alt="Curivo — Cure dentali all’estero">
+      </a>
 
-    <nav class="nav">
-      <a href="#risultati">Risultati</a>
-      <a href="#servizi">Servizi</a>
-      <a href="#perche">Perché Curivo</a>
-      <a href="#faq">FAQ</a>
-    </nav>
+      <nav class="nav" aria-label="Menu principale">
+        <a href="#risultati">Risultati</a>
+        <a href="#servizi">Servizi</a>
+        <a href="#perche">Perché Curivo</a>
+        <a href="#faq">FAQ</a>
+      </nav>
 
-    <div class="topbar-cta">
-      <a href="#form" class="btn">Preventivo</a>
+      <div class="topbar-cta">
+        <a href="#form" class="btn">Preventivo</a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-  <section id="form">
-  <!-- form -->
-</section>
-
-  <!-- Hero -->
   <main>
+    <!-- Hero -->
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-left">
@@ -59,11 +77,12 @@
             Trasforma il tuo sorriso con
             <span class="grad">cliniche selezionate</span> all’estero
           </h1>
- <div class="trust-badges">
-  <div class="trust-badge">⭐ Cliniche selezionate</div>
-  <div class="trust-badge">🇮🇹 Assistenza in italiano</div>
-  <div class="trust-badge">💰 Risparmio fino al 70%</div>
-</div>
+
+          <div class="trust-badges">
+            <div class="trust-badge">⭐ Cliniche selezionate</div>
+            <div class="trust-badge">🇮🇹 Assistenza in italiano</div>
+            <div class="trust-badge">💰 Risparmio fino al 70%</div>
+          </div>
 
           <p class="lead">
             Ricevi una <b>valutazione indicativa gratuita</b> e scegli l’opzione più adatta al tuo caso.
@@ -98,76 +117,67 @@
           </div>
         </div>
 
-       <div class="hero-right">
-  <div class="hero-card" id="form">
-    <div class="hero-card-head">
-      <div class="hero-card-title">Richiedi il tuo preventivo</div>
-      <div class="hero-card-sub">Risposta indicativa in 24–48 ore • Assistenza in italiano</div>
-    </div>
+        <div class="hero-right">
+          <div class="hero-card" id="form">
+            <div class="hero-card-head">
+              <div class="hero-card-title">Richiedi il tuo preventivo</div>
+              <div class="hero-card-sub">Risposta indicativa in 24–48 ore • Assistenza in italiano</div>
+            </div>
 
-   <div class="hero-right">
-  <div class="hero-card" id="form">
+            <form id="quoteForm" class="form" novalidate>
+              <label>
+                <span>Nome</span>
+                <input name="name" placeholder="Mario Rossi" required />
+              </label>
 
-    <form id="quoteForm" class="form">
+              <label>
+                <span>Telefono</span>
+                <input name="phone" placeholder="+39 ..." required />
+              </label>
 
-      <label>
-        <span>Nome</span>
-        <input name="name" placeholder="Mario Rossi" required />
-      </label>
+              <label>
+                <span>Email</span>
+                <input name="email" type="email" placeholder="nome@email.it" required />
+              </label>
 
-      <label>
-        <span>Telefono</span>
-        <input name="phone" placeholder="+39 ..." required />
-      </label>
+              <label>
+                <span>Trattamento</span>
+                <select name="treatment" required>
+                  <option value="" selected>Seleziona…</option>
+                  <option>Impianti</option>
+                  <option>Faccette</option>
+                  <option>Sbiancamento</option>
+                  <option>All-on-4 / All-on-6</option>
+                  <option>Ortodonzia</option>
+                  <option>Altro</option>
+                </select>
+              </label>
 
-      <label>
-        <span>Email</span>
-        <input name="email" type="email" placeholder="nome@email.it" required />
-      </label>
+              <label>
+                <span>Note (facoltativo)</span>
+                <textarea name="notes" rows="3" placeholder="Dettagli utili, urgenza, budget…"></textarea>
+              </label>
 
-      <label>
-        <span>Trattamento</span>
-        <select name="treatment" required>
-          <option value="" selected>Seleziona…</option>
-          <option>Impianti</option>
-          <option>Faccette</option>
-          <option>Sbiancamento</option>
-          <option>All-on-4 / All-on-6</option>
-          <option>Ortodonzia</option>
-          <option>Altro</option>
-        </select>
-      </label>
+              <label class="consent">
+                <input type="checkbox" required />
+                <span>
+                  Accetto che i miei dati vengano usati per ricontattarmi e gestire la richiesta.
+                  <a href="/privacy.html">Privacy</a>.
+                </span>
+              </label>
 
-      <label>
-        <span>Note (facoltativo)</span>
-        <textarea name="notes" rows="3" placeholder="Dettagli utili, urgenza, budget…"></textarea>
-      </label>
+              <button class="btn full" type="submit">Ricevi il preventivo</button>
 
-      <label class="consent">
-        <input type="checkbox" required />
-        <span>
-          Accetto che i miei dati vengano usati per ricontattarmi e gestire la richiesta.
-          <a href="/privacy.html">Privacy</a>.
-        </span>
-      </label>
+              <div class="mini">
+                Preferisci WhatsApp?
+                <a href="https://wa.me/393389074428?text=Ciao%2C%20vorrei%20ricevere%20un%20preventivo%20per%20cure%20mediche%20all%E2%80%99estero" target="_blank" rel="noopener">
+                  Scrivici qui
+                </a>
+              </div>
 
-      <button class="btn full" type="submit">
-  Ricevi il preventivo
-</button>
-
-      <div class="mini">
-        Preferisci WhatsApp?
-        <a href="https://wa.me/393389074428?text=Ciao%2C%20vorrei%20ricevere%20un%20preventivo%20per%20cure%20mediche%20all%E2%80%99estero" target="_blank" rel="noopener">
-          Scrivici qui
-        </a>
-      </div>
-
-      <div id="formMsg" class="form-msg" role="status" aria-live="polite"></div>
-
-    </form>
-
-  </div>
-</div>
+              <div id="formMsg" class="form-msg" role="status" aria-live="polite"></div>
+            </form>
+          </div>
 
           <div class="as-seen">
             <div class="as-seen-title">Come visto su</div>
@@ -184,84 +194,85 @@
     </section>
 
     <!-- Results -->
-   <section class="section" id="risultati">
-  <div class="container">
-    <div class="section-head">
-      <h2>Prima e dopo</h2>
-      <p>Swipe/drag: confronta i risultati in modalità makeover.</p>
-    </div>
-
-    <div class="ba-carousel">
-      <button class="ba-nav prev" type="button" aria-label="Slide precedente">‹</button>
-
-      <div class="ba-track" id="baTrack">
-        <!-- SLIDE 1 -->
-        <div class="ba-slide">
-          <div class="ba-title">Smile makeover</div>
-          <div class="ba">
-            <img class="ba-img before" src="/assets/img/before1.jpg" alt="Prima - Smile makeover">
-            <div class="ba-after-wrap">
-              <img class="ba-img after" src="/assets/img/after1.jpg" alt="Dopo - Smile makeover">
-            </div>
-            <div class="ba-handle" aria-hidden="true"></div>
-            <input class="ba-range" type="range" min="10" max="90" value="55" aria-label="slider prima e dopo">
-          </div>
-          <div class="ba-meta">
-            <span>Tempo: 5–7 giorni</span>
-            <span>Risparmio: fino al 60%*</span>
-          </div>
+    <section class="section" id="risultati">
+      <div class="container">
+        <div class="section-head">
+          <h2>Prima e dopo</h2>
+          <p>Swipe/drag: confronta i risultati in modalità makeover.</p>
         </div>
 
-        <!-- SLIDE 2 -->
-        <div class="ba-slide">
-          <div class="ba-title">Impianti</div>
-          <div class="ba">
-            <img class="ba-img before" src="/assets/img/before2.jpg" alt="Prima - Impianti">
-            <div class="ba-after-wrap">
-              <img class="ba-img after" src="/assets/img/after2.jpg" alt="Dopo - Impianti">
+        <div class="ba-carousel">
+          <button class="ba-nav prev" type="button" aria-label="Slide precedente">‹</button>
+
+          <div class="ba-track" id="baTrack">
+            <!-- SLIDE 1 -->
+            <div class="ba-slide">
+              <div class="ba-title">Smile makeover</div>
+              <div class="ba">
+                <img class="ba-img before" src="/assets/img/before1.jpg" alt="Prima - Smile makeover">
+                <div class="ba-after-wrap">
+                  <img class="ba-img after" src="/assets/img/after1.jpg" alt="Dopo - Smile makeover">
+                </div>
+                <div class="ba-handle" aria-hidden="true"></div>
+                <input class="ba-range" type="range" min="10" max="90" value="55" aria-label="slider prima e dopo">
+              </div>
+              <div class="ba-meta">
+                <span>Tempo: 5–7 giorni</span>
+                <span>Risparmio: fino al 60%*</span>
+              </div>
             </div>
-            <div class="ba-handle" aria-hidden="true"></div>
-            <input class="ba-range" type="range" min="10" max="90" value="50" aria-label="slider prima e dopo">
+
+            <!-- SLIDE 2 -->
+            <div class="ba-slide">
+              <div class="ba-title">Impianti</div>
+              <div class="ba">
+                <img class="ba-img before" src="/assets/img/before2.jpg" alt="Prima - Impianti">
+                <div class="ba-after-wrap">
+                  <img class="ba-img after" src="/assets/img/after2.jpg" alt="Dopo - Impianti">
+                </div>
+                <div class="ba-handle" aria-hidden="true"></div>
+                <input class="ba-range" type="range" min="10" max="90" value="50" aria-label="slider prima e dopo">
+              </div>
+              <div class="ba-meta">
+                <span>Tempo: 3–5 giorni</span>
+                <span>Piano: su misura</span>
+              </div>
+            </div>
+
+            <!-- SLIDE 3 -->
+            <div class="ba-slide">
+              <div class="ba-title">Faccette</div>
+              <div class="ba">
+                <img class="ba-img before" src="/assets/img/before3.jpg" alt="Prima - Faccette">
+                <div class="ba-after-wrap">
+                  <img class="ba-img after" src="/assets/img/after3.jpg" alt="Dopo - Faccette">
+                </div>
+                <div class="ba-handle" aria-hidden="true"></div>
+                <input class="ba-range" type="range" min="10" max="90" value="60" aria-label="slider prima e dopo">
+              </div>
+              <div class="ba-meta">
+                <span>Tempo: 4–6 giorni</span>
+                <span>Look naturale</span>
+              </div>
+            </div>
           </div>
-          <div class="ba-meta">
-            <span>Tempo: 3–5 giorni</span>
-            <span>Piano: su misura</span>
-          </div>
+
+          <button class="ba-nav next" type="button" aria-label="Slide successiva">›</button>
         </div>
 
-        <!-- SLIDE 3 -->
-        <div class="ba-slide">
-          <div class="ba-title">Faccette</div>
-          <div class="ba">
-            <img class="ba-img before" src="/assets/img/before3.jpg" alt="Prima - Faccette">
-            <div class="ba-after-wrap">
-              <img class="ba-img after" src="/assets/img/after3.jpg" alt="Dopo - Faccette">
-            </div>
-            <div class="ba-handle" aria-hidden="true"></div>
-            <input class="ba-range" type="range" min="10" max="90" value="60" aria-label="slider prima e dopo">
-          </div>
-          <div class="ba-meta">
-            <span>Tempo: 4–6 giorni</span>
-            <span>Look naturale</span>
-          </div>
+        <div class="ba-dots" id="baDots" aria-label="Paginazione carosello"></div>
+
+        <div class="cta-row">
+          <a class="btn" href="#form">Richiedi preventivo</a>
+          <a class="btn ghost" href="#faq">Domande frequenti</a>
+        </div>
+
+        <div class="fineprint" style="margin-top:10px;">
+          *Stime indicative: variano in base al caso clinico.
         </div>
       </div>
+    </section>
 
-      <button class="ba-nav next" type="button" aria-label="Slide successiva">›</button>
-    </div>
-
-    <div class="ba-dots" id="baDots" aria-label="Paginazione carosello"></div>
-
-    <div class="cta-row">
-      <a class="btn" href="#form">Richiedi preventivo</a>
-      <a class="btn ghost" href="#faq">Domande frequenti</a>
-    </div>
-
-    <div class="fineprint" style="margin-top:10px;">
-      *Stime indicative: variano in base al caso clinico.
-    </div>
-  </div>
-</section>
     <!-- Services -->
     <section class="section alt" id="servizi">
       <div class="container">
@@ -352,88 +363,90 @@
         </div>
       </div>
     </section>
+
+    <!-- Guide utili -->
     <section class="section">
-  <div class="container">
-    <div class="section-head">
-      <h2>Guide utili</h2>
-      <p>Approfondimenti su prezzi, trattamenti e turismo dentale.</p>
-    </div>
+      <div class="container">
+        <div class="section-head">
+          <h2>Guide utili</h2>
+          <p>Approfondimenti su prezzi, trattamenti e turismo dentale.</p>
+        </div>
 
-    <div class="service-grid">
-      <article class="service">
-        <h3><a href="/rifarsi-i-denti-all-estero-costo.html">Rifarsi i denti all’estero: costo</a></h3>
-        <p>Una guida chiara per capire i costi delle riabilitazioni complete.</p>
-      </article>
+        <div class="service-grid">
+          <article class="service">
+            <h3><a href="/rifarsi-i-denti-all-estero-costo.html">Rifarsi i denti all’estero: costo</a></h3>
+            <p>Una guida chiara per capire i costi delle riabilitazioni complete.</p>
+          </article>
 
-      <article class="service">
-        <h3><a href="/faccette-dentali-albania-prezzo.html">Faccette dentali in Albania: prezzo</a></h3>
-        <p>Prezzi indicativi, tempi del trattamento e cosa controllare.</p>
-      </article>
+          <article class="service">
+            <h3><a href="/faccette-dentali-albania-prezzo.html">Faccette dentali in Albania: prezzo</a></h3>
+            <p>Prezzi indicativi, tempi del trattamento e cosa controllare.</p>
+          </article>
 
-      <article class="service">
-        <h3><a href="/turismo-dentale-albania.html">Turismo dentale in Albania</a></h3>
-        <p>Come funziona, cosa verificare e quando richiedere una valutazione.</p>
-      </article>
-    </div>
-  </div>
-</section>
+          <article class="service">
+            <h3><a href="/turismo-dentale-albania.html">Turismo dentale in Albania</a></h3>
+            <p>Come funziona, cosa verificare e quando richiedere una valutazione.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Altre guide -->
     <section class="section">
-  <div class="container">
-    <div class="section-head">
-      <h2>Altre guide utili</h2>
-      <p>Approfondimenti su prezzi, trattamenti e opzioni disponibili.</p>
-    </div>
+      <div class="container">
+        <div class="section-head">
+          <h2>Altre guide utili</h2>
+          <p>Approfondimenti su prezzi, trattamenti e opzioni disponibili.</p>
+        </div>
 
-    <div class="service-grid">
+        <div class="service-grid">
+          <article class="service">
+            <h3>
+              <a href="/costo-impianti-dentali.html">
+                Costo impianti dentali
+              </a>
+            </h3>
+            <p>Prezzi indicativi, differenze Italia vs estero e cosa include un preventivo serio.</p>
+          </article>
 
-      <article class="service">
-        <h3>
-          <a href="/costo-impianti-dentali.html">
-            Costo impianti dentali
-          </a>
-        </h3>
-        <p>Prezzi indicativi, differenze Italia vs estero e cosa include un preventivo serio.</p>
-      </article>
+          <article class="service">
+            <h3>
+              <a href="/dentista-albania-prezzi.html">
+                Dentista Albania: prezzi
+              </a>
+            </h3>
+            <p>Panoramica dei costi medi in Albania per impianti, faccette e altri trattamenti.</p>
+          </article>
 
-      <article class="service">
-        <h3>
-          <a href="/dentista-albania-prezzi.html">
-            Dentista Albania: prezzi
-          </a>
-        </h3>
-        <p>Panoramica dei costi medi in Albania per impianti, faccette e altri trattamenti.</p>
-      </article>
+          <article class="service">
+            <h3>
+              <a href="/impianti-dentali-albania-prezzi.html">
+                Impianti dentali in Albania
+              </a>
+            </h3>
+            <p>Una guida pratica sui costi degli impianti dentali in Albania e su come richiedere un preventivo.</p>
+          </article>
 
-      <article class="service">
-        <h3>
-          <a href="/impianti-dentali-albania-prezzi.html">
-            Impianti dentali in Albania
-          </a>
-        </h3>
-        <p>Una guida pratica sui costi degli impianti dentali in Albania e su come richiedere un preventivo.</p>
-      </article>
+          <article class="service">
+            <h3>
+              <a href="/all-on-4-albania-costo.html">
+                All-on-4 Albania: costo
+              </a>
+            </h3>
+            <p>Quanto costa una riabilitazione All-on-4 in Albania e quali fattori fanno cambiare il prezzo.</p>
+          </article>
 
-      <article class="service">
-        <h3>
-          <a href="/all-on-4-albania-costo.html">
-            All-on-4 Albania: costo
-          </a>
-        </h3>
-        <p>Quanto costa una riabilitazione All-on-4 in Albania e quali fattori fanno cambiare il prezzo.</p>
-      </article>
-
-      <article class="service">
-        <h3>
-          <a href="/dentista-albania-recensioni.html">
-            Dentista Albania: recensioni
-          </a>
-        </h3>
-        <p>Cosa controllare davvero nelle recensioni e come valutare l’affidabilità di una clinica.</p>
-      </article>
-
-    </div>
-  </div>
-</section>
+          <article class="service">
+            <h3>
+              <a href="/turismo-dentale-albania.html">
+                Turismo dentale Albania
+              </a>
+            </h3>
+            <p>Come funziona il percorso, cosa verificare prima di partire e come richiedere una valutazione.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
     <!-- Testimonials -->
     <section class="section alt" id="testimonianze">
@@ -466,62 +479,62 @@
         </div>
       </div>
     </section>
+
+    <!-- Confronto prezzi -->
     <section class="section alt" id="confronto-prezzi">
-  <div class="container">
-    <div class="section-head">
-      <h2>Confronto prezzi</h2>
-      <p>Una stima indicativa per capire l’ordine di grandezza dei costi.</p>
-    </div>
-
-    <div class="price-compare">
-
-      <div class="price-card">
-        <div class="price-title">Impianto singolo</div>
-        <div class="price-row">
-          <span>Italia</span>
-          <strong>1.200€ – 2.000€</strong>
+      <div class="container">
+        <div class="section-head">
+          <h2>Confronto prezzi</h2>
+          <p>Una stima indicativa per capire l’ordine di grandezza dei costi.</p>
         </div>
-        <div class="price-row">
-          <span>Estero</span>
-          <strong>450€ – 750€</strong>
+
+        <div class="price-compare">
+          <div class="price-card">
+            <div class="price-title">Impianto singolo</div>
+            <div class="price-row">
+              <span>Italia</span>
+              <strong>1.200€ – 2.000€</strong>
+            </div>
+            <div class="price-row">
+              <span>Estero</span>
+              <strong>450€ – 750€</strong>
+            </div>
+          </div>
+
+          <div class="price-card">
+            <div class="price-title">All-on-4</div>
+            <div class="price-row">
+              <span>Italia</span>
+              <strong>8.000€ – 15.000€</strong>
+            </div>
+            <div class="price-row">
+              <span>Estero</span>
+              <strong>3.500€ – 7.000€</strong>
+            </div>
+          </div>
+
+          <div class="price-card">
+            <div class="price-title">Faccette dentali</div>
+            <div class="price-row">
+              <span>Italia</span>
+              <strong>500€ – 1.200€</strong>
+            </div>
+            <div class="price-row">
+              <span>Estero</span>
+              <strong>300€ – 600€</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="fineprint" style="margin-top:14px;">
+          I prezzi sono indicativi e possono variare in base al caso clinico, ai materiali e al piano di trattamento.
+        </div>
+
+        <div class="cta-row" style="margin-top:18px;">
+          <a class="btn" href="#form">Richiedi preventivo gratuito</a>
         </div>
       </div>
-
-      <div class="price-card">
-        <div class="price-title">All-on-4</div>
-        <div class="price-row">
-          <span>Italia</span>
-          <strong>8.000€ – 15.000€</strong>
-        </div>
-        <div class="price-row">
-          <span>Estero</span>
-          <strong>3.500€ – 7.000€</strong>
-        </div>
-      </div>
-
-      <div class="price-card">
-        <div class="price-title">Faccette dentali</div>
-        <div class="price-row">
-          <span>Italia</span>
-          <strong>500€ – 1.200€</strong>
-        </div>
-        <div class="price-row">
-          <span>Estero</span>
-          <strong>300€ – 600€</strong>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="fineprint" style="margin-top:14px;">
-      I prezzi sono indicativi e possono variare in base al caso clinico, ai materiali e al piano di trattamento.
-    </div>
-
-    <div class="cta-row" style="margin-top:18px;">
-      <a class="btn" href="/#form">Richiedi preventivo gratuito</a>
-    </div>
-  </div>
-</section>
+    </section>
 
     <!-- FAQ -->
     <section class="section" id="faq">
@@ -584,46 +597,16 @@
     WhatsApp
   </a>
 
-  <script src="/assets/app.js"></script>
-  <a href="https://wa.me/393389074428?text=Ciao%20vorrei%20informazioni%20per%20le%20cure%20dentali%20all'estero"
-class="whatsapp-button"
-target="_blank">
-💬 WhatsApp
-</a>
+  <!-- Popup -->
   <div id="popup" class="popup">
-<div class="popup-content">
+    <div class="popup-content">
+      <h3>Preventivo gratuito</h3>
+      <p>Scopri quanto puoi risparmiare sulle cure dentali.</p>
+      <a href="#form" class="popup-button">Richiedi preventivo</a>
+      <span id="closePopup">✕</span>
+    </div>
+  </div>
 
-<h3>Preventivo gratuito</h3>
-
-<p>Scopri quanto puoi risparmiare sulle cure dentali.</p>
-
-<a href="#form" class="popup-button">Richiedi preventivo</a>
-
-<span id="closePopup">✕</span>
-
-</div>
-</div>
+  <script src="/assets/app.js"></script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
