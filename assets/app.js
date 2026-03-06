@@ -1,4 +1,4 @@
-const WEB_APP_URL = "INCOLLA_QUI_LA_TUA_WEB_APP_URL";
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwxfhgCmhJO_vpWTbG2jbMH6VWs1_FPotMyBCohhJO5Y8ZK2wIWjNNmMUiJjK16fw/exec";
 
 const form = document.getElementById("quoteForm");
 const msg = document.getElementById("formMsg");
@@ -244,3 +244,4 @@ document.getElementById("closePopup")?.addEventListener("click", function () {
   const popup = document.getElementById("popup");
   if (popup) popup.style.display = "none";
 });
+
