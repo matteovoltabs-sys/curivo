@@ -1,6 +1,6 @@
 // === CONFIG ===
 // Incolla qui l'URL della tua Google Apps Script Web App (termina con /exec)
-const WEB_APP_URL = "INCOLLA_QUI_LA_TUA_WEB_APP_URL";
+const WEB_APP_URL = https://script.google.com/macros/s/AKfycbwxfhgCmhJO_vpWTbG2jbMH6VWs1_FPotMyBCohhJO5Y8ZK2wIWjNNmMUiJjK16fw/exec;
 
 // --- Before/After sliders ---
 document.querySelectorAll(".ba").forEach((wrap) => {
@@ -29,7 +29,7 @@ function setMsg(type, text){
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  if (!WEB_APP_URL || WEB_APP_URL.includes("INCOLLA_QUI")) {
+  if (!WEB_APP_URL || WEB_APP_URL.includes("https://script.google.com/macros/s/AKfycbwxfhgCmhJO_vpWTbG2jbMH6VWs1_FPotMyBCohhJO5Y8ZK2wIWjNNmMUiJjK16fw/exec")) {
     setMsg("err", "Configurazione mancante: inserisci la WEB_APP_URL in assets/app.js");
     return;
   }
@@ -124,4 +124,5 @@ document.querySelectorAll(".ba").forEach((wrap) => {
 })();
 
 });
+
 
