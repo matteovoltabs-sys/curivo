@@ -10,24 +10,43 @@ function setMsg(type, text) {
 
 if (form) {
   form.addEventListener("submit", async function (e) {
-    e.preventDefault();
 
-    const formData = new FormData(form);
+  e.preventDefault();
 
-    try {
-      await fetch(WEB_APP_URL, {
-        method: "POST",
-        body: new URLSearchParams(formData),
-        mode: "no-cors"
-      });
+  const privacy = document.getElementById("privacyCheck");
+  const privacyError = document.getElementById("privacyError");
 
-      form.reset();
-      setMsg("ok", "Richiesta inviata! Ti contatteremo a breve.");
-    } catch (error) {
-      setMsg("err", "Errore nell'invio. Riprova oppure contattaci su WhatsApp.");
-    }
-  });
+  if (!privacy.checked) {
+    privacyError.classList.add("show");
+    privacy.parentElement.classList.add("error");
+    return;
+  }
+
+  privacyError.classList.remove("show");
+  privacy.parentElement.classList.remove("error");
+
+  const formData = new FormData(form);
+
+  try {
+
+    await fetch(WEB_APP_URL, {
+      method: "POST",
+      body: new URLSearchParams(formData),
+      mode: "no-cors"
+    });
+
+    form.reset();
+    setMsg("ok", "Richiesta inviata! Ti contatteremo a breve.");
+
+  } catch (error) {
+
+    setMsg("err", "Errore nell'invio. Riprova oppure contattaci su WhatsApp.");
+
+  }
+
+});
 }
 
  
+
 
