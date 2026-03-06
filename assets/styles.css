@@ -2196,6 +2196,31 @@ grid-template-columns:1fr;
     padding:24px 20px;
   }
 }
+/* ===== POPUP CTA ===== */
+
+.popup-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:18px;
+  padding:14px 26px;
+
+  background: var(--navy);
+  color:#fff;
+  font-weight:800;
+  font-size:16px;
+
+  border-radius:999px;
+  text-decoration:none;
+
+  box-shadow:0 10px 30px rgba(15,23,42,.25);
+  transition:all .2s ease;
+}
+
+.popup-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 35px rgba(15,23,42,.30);
+}
 
 
 
