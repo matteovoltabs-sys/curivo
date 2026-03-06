@@ -1158,6 +1158,45 @@ textarea{
   padding:4px;
 }
 
+/* ===== Form validation ===== */
+
+.field-error{
+  display:none;
+  margin-top:6px;
+  font-size:13px;
+  font-weight:700;
+  color:#d93025;
+}
+
+.field-error.show{
+  display:block;
+}
+
+input.input-error,
+select.input-error,
+textarea.input-error{
+  border-color:#d93025 !important;
+  box-shadow:0 0 0 4px rgba(217,48,37,0.10) !important;
+}
+
+.privacy-error{
+  display:none;
+  margin-top:8px;
+  font-size:14px;
+  font-weight:700;
+  color:#d93025;
+}
+
+.privacy-error.show{
+  display:block;
+}
+
+.consent.error{
+  outline:2px solid #d93025;
+  border-radius:8px;
+  padding:6px;
+}
+
 
 
 
