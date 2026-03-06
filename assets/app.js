@@ -244,4 +244,9 @@ document.getElementById("closePopup")?.addEventListener("click", function () {
   const popup = document.getElementById("popup");
   if (popup) popup.style.display = "none";
 });
+document.querySelectorAll(".popup-btn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    document.getElementById("popup").style.display="none";
+  });
+});
 
