@@ -124,62 +124,64 @@
               <div class="hero-card-sub">Risposta indicativa in 24–48 ore • Assistenza in italiano</div>
             </div>
 
-            <form id="quoteForm" class="form" novalidate>
-              <label>
-                <span>Nome</span>
-                <input name="name" placeholder="Mario Rossi" required />
-              </label>
+<form id="quoteForm" class="form" novalidate>
+  <label>
+    <span>Nome</span>
+    <input name="name" id="name" placeholder="Mario Rossi" required />
+    <div class="field-error" id="error-name"></div>
+  </label>
 
-              <label>
-                <span>Telefono</span>
-                <input name="phone" placeholder="+39 ..." required />
-              </label>
+  <label>
+    <span>Telefono</span>
+    <input name="phone" id="phone" placeholder="+39 ..." required />
+    <div class="field-error" id="error-phone"></div>
+  </label>
 
-              <label>
-                <span>Email</span>
-                <input name="email" type="email" placeholder="nome@email.it" required />
-              </label>
+  <label>
+    <span>Email</span>
+    <input name="email" id="email" type="email" placeholder="nome@email.it" required />
+    <div class="field-error" id="error-email"></div>
+  </label>
 
-              <label>
-                <span>Trattamento</span>
-                <select name="treatment" required>
-                  <option value="" selected>Seleziona…</option>
-                  <option>Impianti</option>
-                  <option>Faccette</option>
-                  <option>Sbiancamento</option>
-                  <option>All-on-4 / All-on-6</option>
-                  <option>Ortodonzia</option>
-                  <option>Altro</option>
-                </select>
-              </label>
+  <label>
+    <span>Trattamento</span>
+    <select name="treatment" id="treatment" required>
+      <option value="" selected>Seleziona…</option>
+      <option>Impianti</option>
+      <option>Faccette</option>
+      <option>Sbiancamento</option>
+      <option>All-on-4 / All-on-6</option>
+      <option>Ortodonzia</option>
+      <option>Altro</option>
+    </select>
+    <div class="field-error" id="error-treatment"></div>
+  </label>
 
-              <label>
-                <span>Note (facoltativo)</span>
-                <textarea name="notes" rows="3" placeholder="Dettagli utili, urgenza, budget…"></textarea>
-              </label>
+  <label>
+    <span>Note (facoltativo)</span>
+    <textarea name="notes" id="notes" rows="3" placeholder="Dettagli utili, urgenza, budget…"></textarea>
+  </label>
 
-              <label class="consent">
-  <input type="checkbox" id="privacyCheck" />
-  <span>
-    Accetto che i miei dati vengano usati per ricontattarmi e gestire la richiesta.
-    <a href="/privacy.html">Privacy</a>.
-  </span>
-</label>
+  <label class="consent" id="privacyConsent">
+    <input type="checkbox" id="privacyCheck" />
+    <span>
+      Accetto che i miei dati vengano usati per ricontattarmi e gestire la richiesta.
+      <a href="/privacy.html">Privacy</a>.
+    </span>
+  </label>
+  <div id="privacyError" class="privacy-error">Devi accettare la privacy per inviare la richiesta.</div>
 
-<div id="privacyError" class="privacy-error">
-Devi accettare la privacy per inviare la richiesta.
-</div>
-              <button class="btn full" type="submit">Ricevi il preventivo</button>
+  <button class="btn full" type="submit">Ricevi il preventivo</button>
 
-              <div class="mini">
-                Preferisci WhatsApp?
-                <a href="https://wa.me/393389074428?text=Ciao%2C%20vorrei%20ricevere%20un%20preventivo%20per%20cure%20mediche%20all%E2%80%99estero" target="_blank" rel="noopener">
-                  Scrivici qui
-                </a>
-              </div>
+  <div class="mini">
+    Preferisci WhatsApp?
+    <a href="https://wa.me/393389074428?text=Ciao%2C%20vorrei%20ricevere%20un%20preventivo%20per%20cure%20mediche%20all%E2%80%99estero" target="_blank" rel="noopener">
+      Scrivici qui
+    </a>
+  </div>
 
-              <div id="formMsg" class="form-msg" role="status" aria-live="polite"></div>
-            </form>
+  <div id="formMsg" class="form-msg" role="status" aria-live="polite"></div>
+</form>
           </div>
 
           <div class="as-seen">
@@ -655,5 +657,6 @@ Devi accettare la privacy per inviare la richiesta.
   <script src="/assets/app.js"></script>
 </body>
 </html>
+
 
 
