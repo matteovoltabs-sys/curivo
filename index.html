@@ -159,13 +159,16 @@
               </label>
 
               <label class="consent">
-                <input type="checkbox" required />
-                <span>
-                  Accetto che i miei dati vengano usati per ricontattarmi e gestire la richiesta.
-                  <a href="/privacy.html">Privacy</a>.
-                </span>
-              </label>
+  <input type="checkbox" id="privacyCheck" />
+  <span>
+    Accetto che i miei dati vengano usati per ricontattarmi e gestire la richiesta.
+    <a href="/privacy.html">Privacy</a>.
+  </span>
+</label>
 
+<div id="privacyError" class="privacy-error">
+Devi accettare la privacy per inviare la richiesta.
+</div>
               <button class="btn full" type="submit">Ricevi il preventivo</button>
 
               <div class="mini">
@@ -652,4 +655,5 @@
   <script src="/assets/app.js"></script>
 </body>
 </html>
+
 
