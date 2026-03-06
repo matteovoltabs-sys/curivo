@@ -1138,6 +1138,26 @@ textarea{
     font-size:18px;
   }
 }
+/* errore privacy */
+
+.privacy-error{
+  display:none;
+  margin-top:8px;
+  font-size:14px;
+  font-weight:700;
+  color:#d93025;
+}
+
+.privacy-error.show{
+  display:block;
+}
+
+.consent.error{
+  outline:2px solid #d93025;
+  border-radius:6px;
+  padding:4px;
+}
+
 
 
 
