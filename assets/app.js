@@ -289,56 +289,70 @@ if (form) {
     });
   }
 
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
+ form.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    if (!validateForm()) {
-      setMsg("err", "Controlla i campi evidenziati prima di inviare la richiesta.");
-      return;
+  if (!validateForm()) {
+    setMsg("err", "Controlla i campi evidenziati prima di inviare la richiesta.");
+    return;
+  }
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  const originalButtonText = submitButton ? submitButton.textContent : "";
+
+  try {
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Invio in corso...";
     }
 
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton ? submitButton.textContent : "";
+    const files = Array.from(document.getElementById("attachments").files || []);
+    const encodedFiles = await Promise.all(files.map(fileToBase64));
 
+    const payload = {
+      name: document.getElementById("name").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      treatment: document.getElementById("treatment").value.trim(),
+      notes: document.getElementById("notes").value.trim(),
+      files: encodedFiles
+    };
+
+    const response = await fetch(WEB_APP_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const text = await response.text();
+
+    let result;
     try {
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = "Invio in corso...";
-      }
-
-      const files = Array.from(document.getElementById("attachments").files || []);
-      const encodedFiles = await Promise.all(files.map(fileToBase64));
-
-      const payload = {
-        name: document.getElementById("name").value.trim(),
-        phone: document.getElementById("phone").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        treatment: document.getElementById("treatment").value.trim(),
-        notes: document.getElementById("notes").value.trim(),
-        files: encodedFiles
-      };
-
-      await fetch(WEB_APP_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8"
-        },
-        body: JSON.stringify(payload)
-      });
-
-      form.reset();
-      clearAllErrors();
-      renderSelectedFiles();
-      setMsg("ok", "Richiesta inviata! Ti contatteremo a breve.");
-    } catch (error) {
-      setMsg("err", "Errore nell'invio. Riprova oppure contattaci su WhatsApp.");
-    } finally {
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.textContent = originalButtonText;
-      }
+      result = JSON.parse(text);
+    } catch (parseError) {
+      throw new Error("Risposta non valida dalla Web App: " + text);
     }
-  });
+
+    if (!response.ok || !result.success) {
+      throw new Error(result.error || "La Web App non ha salvato i dati.");
+    }
+
+    form.reset();
+    clearAllErrors();
+    renderSelectedFiles();
+    setMsg("ok", "Richiesta inviata! Ti contatteremo a breve.");
+  } catch (error) {
+    console.error("Errore submit form:", error);
+    setMsg("err", "Errore nell'invio: " + error.message);
+  } finally {
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
+    }
+  }
+});
 }
 
 /* ===== Before/After slider ===== */
@@ -421,4 +435,5 @@ document.querySelectorAll(".popup-btn").forEach(btn => {
     if (popup) popup.style.display = "none";
   });
 });
+
 
