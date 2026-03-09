@@ -4,11 +4,13 @@ const form = document.getElementById("quoteForm");
 const msg = document.getElementById("formMsg");
 
 function setMsg(type, text) {
+  if (!msg) return;
   msg.className = "form-msg " + (type === "ok" ? "ok" : "err");
   msg.textContent = text;
 }
 
 function clearGlobalMsg() {
+  if (!msg) return;
   msg.className = "form-msg";
   msg.textContent = "";
 }
@@ -16,7 +18,14 @@ function clearGlobalMsg() {
 function showFieldError(fieldId, message) {
   const field = document.getElementById(fieldId);
   const error = document.getElementById(`error-${fieldId}`);
-  if (field) field.classList.add("input-error");
+
+  if (fieldId === "attachments") {
+    const dropzone = document.getElementById("uploadDropzone");
+    if (dropzone) dropzone.classList.add("input-error");
+  } else if (field) {
+    field.classList.add("input-error");
+  }
+
   if (error) {
     error.textContent = message;
     error.classList.add("show");
@@ -26,7 +35,14 @@ function showFieldError(fieldId, message) {
 function clearFieldError(fieldId) {
   const field = document.getElementById(fieldId);
   const error = document.getElementById(`error-${fieldId}`);
-  if (field) field.classList.remove("input-error");
+
+  if (fieldId === "attachments") {
+    const dropzone = document.getElementById("uploadDropzone");
+    if (dropzone) dropzone.classList.remove("input-error");
+  } else if (field) {
+    field.classList.remove("input-error");
+  }
+
   if (error) {
     error.textContent = "";
     error.classList.remove("show");
@@ -34,13 +50,11 @@ function clearFieldError(fieldId) {
 }
 
 function clearAllErrors() {
-  ["name", "phone", "email", "treatment"].forEach(clearFieldError);
+  ["name", "phone", "email", "treatment", "attachments"].forEach(clearFieldError);
 
-  const privacy = document.getElementById("privacyCheck");
   const privacyError = document.getElementById("privacyError");
   const privacyConsent = document.getElementById("privacyConsent");
 
-  if (privacy) privacy.checked = privacy.checked; // no-op, keeps state
   if (privacyError) privacyError.classList.remove("show");
   if (privacyConsent) privacyConsent.classList.remove("error");
 
@@ -80,6 +94,30 @@ function validatePrivacy() {
   return true;
 }
 
+function validateAttachments(files) {
+  if (!files) return true;
+  if (files.length > 3) return "Puoi caricare massimo 3 file.";
+
+  const allowed = [
+    "image/jpeg",
+    "image/png",
+    "application/pdf"
+  ];
+
+  const maxSize = 8 * 1024 * 1024;
+
+  for (const file of files) {
+    if (!allowed.includes(file.type)) {
+      return "Sono consentiti solo file JPG, PNG o PDF.";
+    }
+    if (file.size > maxSize) {
+      return "Ogni file deve essere inferiore a 8 MB.";
+    }
+  }
+
+  return true;
+}
+
 function validateForm() {
   clearAllErrors();
 
@@ -87,6 +125,7 @@ function validateForm() {
   const phone = document.getElementById("phone").value;
   const email = document.getElementById("email").value;
   const treatment = document.getElementById("treatment").value;
+  const attachments = document.getElementById("attachments").files;
 
   let isValid = true;
 
@@ -110,11 +149,74 @@ function validateForm() {
     isValid = false;
   }
 
+  const filesCheck = validateAttachments(attachments);
+  if (filesCheck !== true) {
+    showFieldError("attachments", filesCheck);
+    isValid = false;
+  }
+
   if (!validatePrivacy()) {
     isValid = false;
   }
 
   return isValid;
+}
+
+function formatFileSize(bytes) {
+  if (bytes < 1024) return bytes + " B";
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+  return (bytes / (1024 * 1024)).toFixed(1) + " MB";
+}
+
+function renderSelectedFiles() {
+  const input = document.getElementById("attachments");
+  const list = document.getElementById("uploadFileList");
+  const dropzone = document.getElementById("uploadDropzone");
+
+  if (!input || !list || !dropzone) return;
+
+  list.innerHTML = "";
+
+  if (!input.files || input.files.length === 0) {
+    dropzone.classList.remove("has-files");
+    return;
+  }
+
+  dropzone.classList.add("has-files");
+
+  Array.from(input.files).forEach((file) => {
+    const item = document.createElement("div");
+    item.className = "upload-file-item";
+
+    const name = document.createElement("span");
+    name.textContent = file.name;
+
+    const meta = document.createElement("span");
+    meta.className = "upload-file-meta";
+    meta.textContent = formatFileSize(file.size);
+
+    item.appendChild(name);
+    item.appendChild(meta);
+    list.appendChild(item);
+  });
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result || "";
+      const base64 = String(result).split(",")[1];
+      resolve({
+        name: file.name,
+        type: file.type,
+        size: file.size,
+        data: base64
+      });
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 }
 
 if (form) {
@@ -135,6 +237,48 @@ if (form) {
     });
   });
 
+  const attachmentsField = document.getElementById("attachments");
+  const uploadDropzone = document.getElementById("uploadDropzone");
+
+  if (attachmentsField) {
+    attachmentsField.addEventListener("change", () => {
+      renderSelectedFiles();
+      const filesCheck = validateAttachments(attachmentsField.files);
+      if (filesCheck === true) {
+        clearFieldError("attachments");
+      }
+    });
+  }
+
+  if (uploadDropzone && attachmentsField) {
+    ["dragenter", "dragover"].forEach((eventName) => {
+      uploadDropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        uploadDropzone.classList.add("dragover");
+      });
+    });
+
+    ["dragleave", "drop"].forEach((eventName) => {
+      uploadDropzone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        uploadDropzone.classList.remove("dragover");
+      });
+    });
+
+    uploadDropzone.addEventListener("drop", (e) => {
+      const files = e.dataTransfer.files;
+      attachmentsField.files = files;
+      renderSelectedFiles();
+
+      const filesCheck = validateAttachments(attachmentsField.files);
+      if (filesCheck === true) {
+        clearFieldError("attachments");
+      } else {
+        showFieldError("attachments", filesCheck);
+      }
+    });
+  }
+
   const privacy = document.getElementById("privacyCheck");
   if (privacy) {
     privacy.addEventListener("change", () => {
@@ -153,25 +297,51 @@ if (form) {
       return;
     }
 
-    const formData = new FormData(form);
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton ? submitButton.textContent : "";
 
     try {
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Invio in corso...";
+      }
+
+      const files = Array.from(document.getElementById("attachments").files || []);
+      const encodedFiles = await Promise.all(files.map(fileToBase64));
+
+      const payload = {
+        name: document.getElementById("name").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        treatment: document.getElementById("treatment").value.trim(),
+        notes: document.getElementById("notes").value.trim(),
+        files: encodedFiles
+      };
+
       await fetch(WEB_APP_URL, {
         method: "POST",
-        body: new URLSearchParams(formData),
-        mode: "no-cors"
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
       });
 
       form.reset();
       clearAllErrors();
+      renderSelectedFiles();
       setMsg("ok", "Richiesta inviata! Ti contatteremo a breve.");
     } catch (error) {
       setMsg("err", "Errore nell'invio. Riprova oppure contattaci su WhatsApp.");
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
     }
   });
 }
 
-// ===== Before/After slider =====
+/* ===== Before/After slider ===== */
 document.querySelectorAll(".ba").forEach((wrap) => {
   const range = wrap.querySelector(".ba-range");
   const afterWrap = wrap.querySelector(".ba-after-wrap");
@@ -188,7 +358,7 @@ document.querySelectorAll(".ba").forEach((wrap) => {
   range.addEventListener("input", (e) => set(e.target.value));
 });
 
-// ===== Carousel navigation =====
+/* ===== Carousel navigation ===== */
 (function () {
   const track = document.getElementById("baTrack");
   const dotsWrap = document.getElementById("baDots");
@@ -234,7 +404,7 @@ document.querySelectorAll(".ba").forEach((wrap) => {
   }, { passive: true });
 })();
 
-// ===== Popup =====
+/* ===== Popup ===== */
 setTimeout(function () {
   const popup = document.getElementById("popup");
   if (popup) popup.style.display = "block";
@@ -244,9 +414,10 @@ document.getElementById("closePopup")?.addEventListener("click", function () {
   const popup = document.getElementById("popup");
   if (popup) popup.style.display = "none";
 });
-document.querySelectorAll(".popup-btn").forEach(btn=>{
-  btn.addEventListener("click", ()=>{
-    document.getElementById("popup").style.display="none";
+
+document.querySelectorAll(".popup-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const popup = document.getElementById("popup");
+    if (popup) popup.style.display = "none";
   });
 });
-
