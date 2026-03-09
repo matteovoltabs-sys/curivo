@@ -155,34 +155,49 @@ if (form) {
   }
 
   form.addEventListener("submit", async function (e) {
-    e.preventDefault();
+e.preventDefault();
 
-    if (!validateForm()) {
-      setMsg("err", "Controlla i campi evidenziati prima di inviare la richiesta.");
-      return;
-    }
+if (!validateForm()) {
+setMsg("err", "Controlla i campi evidenziati prima di inviare la richiesta.");
+return;
+}
 
-    const submitButton = form.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton ? submitButton.textContent : "";
+const submitButton = form.querySelector('button[type="submit"]');
+const originalButtonText = submitButton ? submitButton.textContent : "";
 
-    try {
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = "Invio in corso...";
-      }
+try {
+if (submitButton) {
+submitButton.disabled = true;
+submitButton.textContent = "Invio in corso...";
+}
 
-      const formData = new FormData();
-      formData.append("name", document.getElementById("name").value.trim());
-      formData.append("phone", document.getElementById("phone").value.trim());
-      formData.append("email", document.getElementById("email").value.trim());
-      formData.append("treatment", document.getElementById("treatment").value.trim());
-      formData.append("notes", document.getElementById("notes").value.trim());
+const formData = new URLSearchParams();
+formData.append("name", document.getElementById("name").value.trim());
+formData.append("phone", document.getElementById("phone").value.trim());
+formData.append("email", document.getElementById("email").value.trim());
+formData.append("treatment", document.getElementById("treatment").value.trim());
+formData.append("notes", document.getElementById("notes").value.trim());
 
-      const response = await fetch(WEB_APP_URL, {
-        method: "POST",
-        body: formData,
-        redirect: "follow"
-      });
+await fetch(WEB_APP_URL, {
+method: "POST",
+body: formData,
+mode: "no-cors"
+});
+
+form.reset();
+clearAllErrors();
+setMsg("ok", "Richiesta inviata! Ti contatteremo a breve.");
+} catch (error) {
+console.error("Errore submit form:", error);
+setMsg("err", "Errore nell'invio. Riprova oppure contattaci su WhatsApp.");
+} finally {
+if (submitButton) {
+submitButton.disabled = false;
+submitButton.textContent = originalButtonText;
+}
+}
+});
+
 
       const text = await response.text();
 
@@ -292,6 +307,7 @@ document.querySelectorAll(".popup-btn").forEach(btn => {
     if (popup) popup.style.display = "none";
   });
 });
+
 
 
 
