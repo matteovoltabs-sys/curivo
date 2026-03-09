@@ -19,10 +19,7 @@ function showFieldError(fieldId, message) {
   const field = document.getElementById(fieldId);
   const error = document.getElementById(`error-${fieldId}`);
 
-  if (fieldId === "attachments") {
-    const dropzone = document.getElementById("uploadDropzone");
-    if (dropzone) dropzone.classList.add("input-error");
-  } else if (field) {
+  if (field) {
     field.classList.add("input-error");
   }
 
@@ -36,10 +33,7 @@ function clearFieldError(fieldId) {
   const field = document.getElementById(fieldId);
   const error = document.getElementById(`error-${fieldId}`);
 
-  if (fieldId === "attachments") {
-    const dropzone = document.getElementById("uploadDropzone");
-    if (dropzone) dropzone.classList.remove("input-error");
-  } else if (field) {
+  if (field) {
     field.classList.remove("input-error");
   }
 
@@ -50,7 +44,7 @@ function clearFieldError(fieldId) {
 }
 
 function clearAllErrors() {
-  ["name", "phone", "email", "treatment", "attachments"].forEach(clearFieldError);
+  ["name", "phone", "email", "treatment"].forEach(clearFieldError);
 
   const privacyError = document.getElementById("privacyError");
   const privacyConsent = document.getElementById("privacyConsent");
@@ -94,30 +88,6 @@ function validatePrivacy() {
   return true;
 }
 
-function validateAttachments(files) {
-  if (!files) return true;
-  if (files.length > 3) return "Puoi caricare massimo 3 file.";
-
-  const allowed = [
-    "image/jpeg",
-    "image/png",
-    "application/pdf"
-  ];
-
-  const maxSize = 8 * 1024 * 1024;
-
-  for (const file of files) {
-    if (!allowed.includes(file.type)) {
-      return "Sono consentiti solo file JPG, PNG o PDF.";
-    }
-    if (file.size > maxSize) {
-      return "Ogni file deve essere inferiore a 8 MB.";
-    }
-  }
-
-  return true;
-}
-
 function validateForm() {
   clearAllErrors();
 
@@ -125,7 +95,6 @@ function validateForm() {
   const phone = document.getElementById("phone").value;
   const email = document.getElementById("email").value;
   const treatment = document.getElementById("treatment").value;
-  const attachments = document.getElementById("attachments").files;
 
   let isValid = true;
 
@@ -149,12 +118,6 @@ function validateForm() {
     isValid = false;
   }
 
-  const filesCheck = validateAttachments(attachments);
-  if (filesCheck !== true) {
-    showFieldError("attachments", filesCheck);
-    isValid = false;
-  }
-
   if (!validatePrivacy()) {
     isValid = false;
   }
@@ -162,65 +125,9 @@ function validateForm() {
   return isValid;
 }
 
-function formatFileSize(bytes) {
-  if (bytes < 1024) return bytes + " B";
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
-  return (bytes / (1024 * 1024)).toFixed(1) + " MB";
-}
-
-function renderSelectedFiles() {
-  const input = document.getElementById("attachments");
-  const list = document.getElementById("uploadFileList");
-  const dropzone = document.getElementById("uploadDropzone");
-
-  if (!input || !list || !dropzone) return;
-
-  list.innerHTML = "";
-
-  if (!input.files || input.files.length === 0) {
-    dropzone.classList.remove("has-files");
-    return;
-  }
-
-  dropzone.classList.add("has-files");
-
-  Array.from(input.files).forEach((file) => {
-    const item = document.createElement("div");
-    item.className = "upload-file-item";
-
-    const name = document.createElement("span");
-    name.textContent = file.name;
-
-    const meta = document.createElement("span");
-    meta.className = "upload-file-meta";
-    meta.textContent = formatFileSize(file.size);
-
-    item.appendChild(name);
-    item.appendChild(meta);
-    list.appendChild(item);
-  });
-}
-
-function fileToBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result || "";
-      const base64 = String(result).split(",")[1];
-      resolve({
-        name: file.name,
-        type: file.type,
-        size: file.size,
-        data: base64
-      });
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
 if (form) {
   const liveFields = ["name", "phone", "email", "treatment"];
+
   liveFields.forEach((fieldId) => {
     const field = document.getElementById(fieldId);
     if (!field) return;
@@ -237,48 +144,6 @@ if (form) {
     });
   });
 
-  const attachmentsField = document.getElementById("attachments");
-  const uploadDropzone = document.getElementById("uploadDropzone");
-
-  if (attachmentsField) {
-    attachmentsField.addEventListener("change", () => {
-      renderSelectedFiles();
-      const filesCheck = validateAttachments(attachmentsField.files);
-      if (filesCheck === true) {
-        clearFieldError("attachments");
-      }
-    });
-  }
-
-  if (uploadDropzone && attachmentsField) {
-    ["dragenter", "dragover"].forEach((eventName) => {
-      uploadDropzone.addEventListener(eventName, (e) => {
-        e.preventDefault();
-        uploadDropzone.classList.add("dragover");
-      });
-    });
-
-    ["dragleave", "drop"].forEach((eventName) => {
-      uploadDropzone.addEventListener(eventName, (e) => {
-        e.preventDefault();
-        uploadDropzone.classList.remove("dragover");
-      });
-    });
-
-    uploadDropzone.addEventListener("drop", (e) => {
-      const files = e.dataTransfer.files;
-      attachmentsField.files = files;
-      renderSelectedFiles();
-
-      const filesCheck = validateAttachments(attachmentsField.files);
-      if (filesCheck === true) {
-        clearFieldError("attachments");
-      } else {
-        showFieldError("attachments", filesCheck);
-      }
-    });
-  }
-
   const privacy = document.getElementById("privacyCheck");
   if (privacy) {
     privacy.addEventListener("change", () => {
@@ -289,70 +154,62 @@ if (form) {
     });
   }
 
- form.addEventListener("submit", async function (e) {
-  e.preventDefault();
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-  if (!validateForm()) {
-    setMsg("err", "Controlla i campi evidenziati prima di inviare la richiesta.");
-    return;
-  }
-
-  const submitButton = form.querySelector('button[type="submit"]');
-  const originalButtonText = submitButton ? submitButton.textContent : "";
-
-  try {
-    if (submitButton) {
-      submitButton.disabled = true;
-      submitButton.textContent = "Invio in corso...";
+    if (!validateForm()) {
+      setMsg("err", "Controlla i campi evidenziati prima di inviare la richiesta.");
+      return;
     }
 
-    const files = Array.from(document.getElementById("attachments").files || []);
-    const encodedFiles = await Promise.all(files.map(fileToBase64));
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton ? submitButton.textContent : "";
 
-    const payload = {
-      name: document.getElementById("name").value.trim(),
-      phone: document.getElementById("phone").value.trim(),
-      email: document.getElementById("email").value.trim(),
-      treatment: document.getElementById("treatment").value.trim(),
-      notes: document.getElementById("notes").value.trim(),
-      files: encodedFiles
-    };
-
-    const response = await fetch(WEB_APP_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain;charset=utf-8"
-      },
-      body: JSON.stringify(payload)
-    });
-
-    const text = await response.text();
-
-    let result;
     try {
-      result = JSON.parse(text);
-    } catch (parseError) {
-      throw new Error("Risposta non valida dalla Web App: " + text);
-    }
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Invio in corso...";
+      }
 
-    if (!response.ok || !result.success) {
-      throw new Error(result.error || "La Web App non ha salvato i dati.");
-    }
+      const formData = new FormData();
+      formData.append("name", document.getElementById("name").value.trim());
+      formData.append("phone", document.getElementById("phone").value.trim());
+      formData.append("email", document.getElementById("email").value.trim());
+      formData.append("treatment", document.getElementById("treatment").value.trim());
+      formData.append("notes", document.getElementById("notes").value.trim());
 
-    form.reset();
-    clearAllErrors();
-    renderSelectedFiles();
-    setMsg("ok", "Richiesta inviata! Ti contatteremo a breve.");
-  } catch (error) {
-    console.error("Errore submit form:", error);
-    setMsg("err", "Errore nell'invio: " + error.message);
-  } finally {
-    if (submitButton) {
-      submitButton.disabled = false;
-      submitButton.textContent = originalButtonText;
+      const response = await fetch(WEB_APP_URL, {
+        method: "POST",
+        body: formData,
+        redirect: "follow"
+      });
+
+      const text = await response.text();
+
+      let result;
+      try {
+        result = JSON.parse(text);
+      } catch (parseError) {
+        throw new Error("Risposta non valida dalla Web App: " + text);
+      }
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.error || "La Web App non ha salvato i dati.");
+      }
+
+      form.reset();
+      clearAllErrors();
+      setMsg("ok", "Richiesta inviata! Ti contatteremo a breve.");
+    } catch (error) {
+      console.error("Errore submit form:", error);
+      setMsg("err", "Errore nell'invio: " + error.message);
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
     }
-  }
-});
+  });
 }
 
 /* ===== Before/After slider ===== */
@@ -435,6 +292,7 @@ document.querySelectorAll(".popup-btn").forEach(btn => {
     if (popup) popup.style.display = "none";
   });
 });
+
 
 
 
