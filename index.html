@@ -186,35 +186,14 @@
     <textarea name="notes" id="notes" rows="3" placeholder="Dettagli utili, urgenza, budget…"></textarea>
   </label>
 
-  <div class="upload-field">
-    <span class="upload-label">Foto denti / panoramica / PDF (facoltativo)</span>
-
-    <label for="attachments" class="upload-dropzone" id="uploadDropzone">
-      <div class="upload-icon">📎</div>
-      <div class="upload-title">Carica file clinici</div>
-      <div class="upload-subtitle">
-        JPG, PNG o PDF • massimo 3 file • fino a 8 MB ciascuno
-      </div>
-      <div class="upload-cta">Seleziona file</div>
-    </label>
-
-    <input
-      type="file"
-      id="attachments"
-      name="attachments"
-      class="upload-input"
-      accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf"
-      multiple
-    />
-
-    <div id="uploadFileList" class="upload-file-list"></div>
-    <div class="field-error" id="error-attachments"></div>
+  <div class="mini" style="margin-top:-4px;">
+    Se hai foto o panoramica, potrai inviarle successivamente via WhatsApp o email.
   </div>
 
   <label class="consent" id="privacyConsent">
     <input type="checkbox" id="privacyCheck" />
     <span>
-      Accetto che i miei dati, inclusi eventuali file clinici caricati, vengano usati per ricontattarmi, valutare la richiesta e condividerla con cliniche selezionate se necessario.
+      Accetto che i miei dati vengano usati per ricontattarmi e gestire la richiesta.
       <a href="/privacy.html">Privacy</a>.
     </span>
   </label>
@@ -840,6 +819,7 @@
   <script src="/assets/app.js"></script>
 </body>
 </html>
+
 
 
 
