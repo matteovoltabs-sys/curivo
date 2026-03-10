@@ -72,12 +72,16 @@ a{color:inherit;text-decoration:none}
 }
 
 .brand-logo{
-  height: 70px;       
-  width: auto;
-  display: block;
-  max-width: 220px;
+  display:block;
+  width:auto;
+  height:78px;
+  max-width:none;
 }
-
+@media (max-width: 980px){
+  .brand-logo{
+    height:64px;
+  }
+}
 .nav{
   display: flex;
   gap: 16px;
@@ -2624,6 +2628,7 @@ textarea.input-error{
   border-radius:8px;
   padding:6px;
 }
+
 
 
 
