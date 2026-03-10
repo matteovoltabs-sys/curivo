@@ -74,7 +74,7 @@ a{color:inherit;text-decoration:none}
 .brand-logo{
   display:block;
   width:auto;
-  height:78px;
+  height:85px;
   max-width:none;
 }
 @media (max-width: 980px){
@@ -2628,6 +2628,7 @@ textarea.input-error{
   border-radius:8px;
   padding:6px;
 }
+
 
 
 
