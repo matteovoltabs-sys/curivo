@@ -2642,13 +2642,14 @@ img[src*="logo_header"] {
 
 /* versione desktop */
 @media (min-width: 1024px) {
-  img[src*="logo_header"] {
+  img[src*="curivo_logo_header"] {
     height: 56px;
   }
 }
 header {
   padding: 12px 20px;
 }
+
 
 
 
