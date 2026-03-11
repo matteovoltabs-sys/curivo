@@ -2670,12 +2670,12 @@ textarea.input-error{
 
 .hero-feature-row{
   display:flex;
-  flex-wrap:wrap;
-  gap:12px;
+  align-items:center;
+  gap:14px;
   margin-top:20px;
   margin-bottom:14px;
+  flex-wrap:nowrap;   /* impedisce di andare a capo */
 }
-
 .hero-feature-pill{
   display:inline-flex;
   align-items:center;
@@ -2686,6 +2686,7 @@ textarea.input-error{
   border:1px solid rgba(60,180,160,.18);
   box-shadow:0 10px 28px rgba(15,23,42,.05);
   backdrop-filter:blur(10px);
+  white-space:nowrap;   /* mantiene tutto su una riga */
 }
 
 .hero-feature-icon{
@@ -2710,14 +2711,12 @@ textarea.input-error{
 
 /* mobile */
 @media (max-width: 980px){
+
   .hero-feature-row{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:10px;
-    margin-top:18px;
-    margin-bottom:12px;
+    flex-wrap:wrap;
   }
 
+}
   .hero-feature-pill{
     width:100%;
     padding:12px 14px;
@@ -2744,3 +2743,4 @@ textarea.input-error{
     font-size:14px;
   }
 }
+
