@@ -71,27 +71,6 @@ a{color:inherit;text-decoration:none}
   text-decoration: none;
 }
 
-.brand-logo{
-  display:block;
-  width:auto;
-  height:64px;
-  max-width:none;
-}
-
-@media (min-width: 1200px){
-  .brand-logo{
-    height:72px;
-  }
-}
-
-@media (max-width: 980px){
-  .brand-logo{
-    height:42px;
-    width:auto;
-    max-width:none;
-  }
-}
-
 .nav{
   display: flex;
   gap: 16px;
@@ -2677,6 +2656,48 @@ textarea.input-error{
 
   .brand-logo{
     height:42px;
+    width:auto;
+    max-width:none;
+  }
+
+  .topbar-cta{
+    margin-left:auto;
+    flex:0 0 auto;
+  }
+
+  .topbar-cta .btn{
+    padding:10px 12px;
+    font-size:14px;
+    border-radius:12px;
+    white-space:nowrap;
+  }
+}
+/* ===== HEADER LOGO FIX FINALE ===== */
+.brand-logo{
+  display:block;
+  width:auto;
+  height:58px;
+  max-width:none;
+}
+
+@media (min-width: 1200px){
+  .brand-logo{
+    height:66px;
+  }
+}
+
+@media (max-width: 980px){
+  .topbar-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:nowrap;
+    gap:10px;
+    padding:8px 0;
+  }
+
+  .brand-logo{
+    height:38px;
     width:auto;
     max-width:none;
   }
