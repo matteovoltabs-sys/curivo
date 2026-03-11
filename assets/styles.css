@@ -1860,6 +1860,7 @@ textarea.input-error{
   margin:0;
   max-width:620px;
   text-align:right;
+  white-space:nowrap;
 }
 
 @media (max-width: 980px){
@@ -1887,6 +1888,7 @@ textarea.input-error{
     text-align:left;
     font-size:16px;
     line-height:1.55;
+    white-space:normal;
   }
 }
 
@@ -1938,6 +1940,7 @@ textarea.input-error{
     text-align:left;
     font-size:16px;
     line-height:1.55;
+    white-space:normal;
   }
 
   /* Hero */
