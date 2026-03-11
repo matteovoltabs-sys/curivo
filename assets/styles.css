@@ -1858,9 +1858,11 @@ textarea.input-error{
 
 .section-head p{
   margin:0;
-  max-width:620px;
+  max-width:min(720px, 100%);
   text-align:right;
   white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 @media (max-width: 980px){
@@ -1883,12 +1885,11 @@ textarea.input-error{
   }
 
   .section-head p{
-    max-width:none;
+    max-width:min(720px, 100%);
     width:100%;
     text-align:left;
     font-size:16px;
     line-height:1.55;
-    white-space:normal;
   }
 }
 
@@ -1936,11 +1937,10 @@ textarea.input-error{
   .section-head p{
     margin:0;
     width:100%;
-    max-width:none;
+    max-width:min(720px, 100%);
     text-align:left;
     font-size:16px;
     line-height:1.55;
-    white-space:normal;
   }
 
   /* Hero */
