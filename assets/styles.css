@@ -2628,7 +2628,14 @@ textarea.input-error{
   border-radius:8px;
   padding:6px;
 }
-
+.logo img {
+  width: 140px;
+}
+@media (min-width: 1024px) {
+  .logo img {
+    height: 56px;
+  }
+}
 
 
 
