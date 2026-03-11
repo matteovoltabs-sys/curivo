@@ -2666,3 +2666,81 @@ textarea.input-error{
     height:42px;
   }
 }
+/* ===== HERO FEATURE ROW (replacement delle 3 card) ===== */
+
+.hero-feature-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:20px;
+  margin-bottom:14px;
+}
+
+.hero-feature-pill{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 16px;
+  border-radius:16px;
+  background:rgba(255,255,255,0.78);
+  border:1px solid rgba(60,180,160,.18);
+  box-shadow:0 10px 28px rgba(15,23,42,.05);
+  backdrop-filter:blur(10px);
+}
+
+.hero-feature-icon{
+  width:34px;
+  height:34px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg, rgba(60,180,160,.16), rgba(43,108,176,.12));
+  font-size:16px;
+  flex:0 0 auto;
+}
+
+.hero-feature-text{
+  font-size:15px;
+  font-weight:800;
+  color:var(--navy);
+  line-height:1.2;
+  white-space:nowrap;
+}
+
+/* mobile */
+@media (max-width: 980px){
+  .hero-feature-row{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-top:18px;
+    margin-bottom:12px;
+  }
+
+  .hero-feature-pill{
+    width:100%;
+    padding:12px 14px;
+    border-radius:16px;
+  }
+
+  .hero-feature-text{
+    font-size:14px;
+    white-space:normal;
+  }
+}
+/* ===== Header CTA refinement ===== */
+
+.topbar-cta .btn{
+  padding:12px 18px;
+  border-radius:14px;
+  font-weight:800;
+  box-shadow:0 10px 28px rgba(34,48,72,.16);
+}
+
+@media (max-width: 980px){
+  .topbar-cta .btn{
+    padding:10px 14px;
+    font-size:14px;
+  }
+}
