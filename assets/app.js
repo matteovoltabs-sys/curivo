@@ -73,6 +73,10 @@ const privacy = document.getElementById("privacyCheck");
 const privacyError = document.getElementById("privacyError");
 const privacyConsent = document.getElementById("privacyConsent");
 
+if (!privacy || !privacyError || !privacyConsent) {
+return true;
+}
+
 if (!privacy.checked) {
 privacyError.classList.add("show");
 privacyConsent.classList.add("error");
@@ -144,8 +148,10 @@ const privacy = document.getElementById("privacyCheck");
 if (privacy) {
 privacy.addEventListener("change", () => {
 if (privacy.checked) {
-document.getElementById("privacyError").classList.remove("show");
-document.getElementById("privacyConsent").classList.remove("error");
+const privacyError = document.getElementById("privacyError");
+const privacyConsent = document.getElementById("privacyConsent");
+if (privacyError) privacyError.classList.remove("show");
+if (privacyConsent) privacyConsent.classList.remove("error");
 }
 });
 }
@@ -213,6 +219,8 @@ const dotsWrap = document.getElementById("baDots");
 if (!track || !dotsWrap) return;
 
 const slides = Array.from(track.querySelectorAll(".ba-slide"));
+if (slides.length === 0) return;
+
 let index = 0;
 
 slides.forEach((_, i) => {
@@ -253,21 +261,54 @@ dots.forEach((d, di) => d.classList.toggle("active", di === index));
 })();
 
 /* ===== Popup ===== */
+const POPUP_STORAGE_KEY = "curivo_popup_closed";
+
+function closePopup() {
+const popup = document.getElementById("popup");
+if (!popup) return;
+
+popup.style.display = "none";
+
+try {
+localStorage.setItem(POPUP_STORAGE_KEY, "1");
+} catch (_) {
+// no-op when storage is unavailable
+}
+}
+
+function canShowPopup() {
+try {
+return localStorage.getItem(POPUP_STORAGE_KEY) !== "1";
+} catch (_) {
+return true;
+}
+}
+
 setTimeout(function () {
 const popup = document.getElementById("popup");
-if (popup) popup.style.display = "block";
+if (!popup || !canShowPopup()) return;
+popup.style.display = "block";
 }, 15000);
 
 document.getElementById("closePopup")?.addEventListener("click", function () {
-const popup = document.getElementById("popup");
-if (popup) popup.style.display = "none";
+closePopup();
 });
 
 document.querySelectorAll(".popup-btn").forEach(btn => {
 btn.addEventListener("click", () => {
-const popup = document.getElementById("popup");
-if (popup) popup.style.display = "none";
+closePopup();
 });
+});
+
+document.getElementById("popup")?.addEventListener("click", (event) => {
+if (event.target.id === "popup") closePopup();
+});
+
+document.addEventListener("keydown", (event) => {
+if (event.key !== "Escape") return;
+
+const popup = document.getElementById("popup");
+if (popup?.style.display === "block") closePopup();
 });
 
 
