@@ -2636,7 +2636,19 @@ textarea.input-error{
     height: 56px;
   }
 }
+img[src*="logo_header"] {
+  height: 42px;
+}
 
+/* versione desktop */
+@media (min-width: 1024px) {
+  img[src*="logo_header"] {
+    height: 56px;
+  }
+}
+header {
+  padding: 12px 20px;
+}
 
 
 
