@@ -2650,20 +2650,19 @@ header {
   padding: 12px 20px;
 }
 /* Logo header */
-img[src*="logo_header"] {
+img[src*="curivo_logo_header"] {
   height: 52px;
   width: auto;
 }
 
 /* Desktop */
 @media (min-width: 1024px) {
-  img[src*="logo_header"] {
+  img[src*="curivo_logo_header"] {
     height: 72px;
   }
 }
-header {
-  min-height: 70px;
-}
+
+
 
 
 
