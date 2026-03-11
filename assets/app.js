@@ -80,6 +80,18 @@ return true;
 if (!privacy.checked) {
 privacyError.classList.add("show");
 privacyConsent.classList.add("error");
+function validatePrivacy() {
+const privacy = document.getElementById("privacyCheck");
+const privacyError = document.getElementById("privacyError");
+const privacyConsent = document.getElementById("privacyConsent");
+
+if (!privacy || !privacyError || !privacyConsent) {
+return true;
+}
+
+if (!privacy.checked) {
+privacyError.classList.add("show");
+privacyConsent.classList.add("error");
 return false;
 }
 
