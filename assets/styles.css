@@ -266,7 +266,7 @@ input:focus,textarea:focus,select:focus{
 }
 .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:16px; margin-bottom:18px;}
 .section-head h2{margin:0; font-size:28px; letter-spacing:-.02em; color:var(--navy);}
-.section-head p{margin:0; color:var(--muted); max-width: 560px; font-weight:700;}
+.section-head p{margin:0; color:var(--muted); max-width: 100%; font-weight:700; white-space:nowrap !important; overflow:hidden; text-overflow:ellipsis;}
 
 .cta-row{display:flex; gap:12px; margin-top:16px; flex-wrap:wrap;}
 
@@ -1795,8 +1795,12 @@ textarea.input-error{
 
 .section-head p{
   margin:0;
-  max-width:620px;
+  width:max-content;
+  max-width:100%;
   text-align:right;
+  white-space:nowrap !important;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
 
 @media (max-width: 980px){
@@ -1819,11 +1823,14 @@ textarea.input-error{
   }
 
   .section-head p{
-    max-width:none;
     width:100%;
+    max-width:100%;
     text-align:left;
     font-size:16px;
     line-height:1.55;
+    white-space:nowrap !important;
+    overflow:hidden;
+    text-overflow:ellipsis;
   }
 }
 
@@ -1871,10 +1878,13 @@ textarea.input-error{
   .section-head p{
     margin:0;
     width:100%;
-    max-width:none;
+    max-width:100%;
     text-align:left;
     font-size:16px;
     line-height:1.55;
+    white-space:nowrap !important;
+    overflow:hidden;
+    text-overflow:ellipsis;
   }
 
   /* Hero */
