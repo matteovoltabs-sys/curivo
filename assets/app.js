@@ -68,6 +68,13 @@ function validateTreatment(value) {
   return value.trim() !== "";
 }
 
+<<<<<<< codex/check-page-for-required-improvements
+if (!privacy.checked) {
+privacyError.classList.add("show");
+privacyConsent.classList.add("error");
+return false;
+}
+=======
 function validatePrivacy() {
   const privacy = document.getElementById("privacyCheck");
   const privacyError = document.getElementById("privacyError");
@@ -82,6 +89,7 @@ function validatePrivacy() {
     privacyConsent.classList.add("error");
     return false;
   }
+>>>>>>> main
 
   privacyError.classList.remove("show");
   privacyConsent.classList.remove("error");
