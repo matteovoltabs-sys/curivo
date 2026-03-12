@@ -213,19 +213,43 @@ document.querySelectorAll(".ba").forEach((wrap) => {
 
   if (!range || !afterWrap || !handle || !divider) return;
 
-  const set = (v) => {
-    const value = Math.max(0, Math.min(100, Number(v)));
-    afterWrap.style.width = `${value}%`;
-    handle.style.left = `${value}%`;
-    divider.style.left = `${value}%`;
-    range.value = value;
+  const setPosition = (value) => {
+    const v = Math.max(0, Math.min(100, Number(value)));
+    afterWrap.style.width = `${v}%`;
+    handle.style.left = `${v}%`;
+    divider.style.left = `${v}%`;
+    range.value = v;
   };
 
-  set(range.value || wrap.dataset.start || 50);
+  setPosition(range.value || 55);
 
   range.addEventListener("input", (e) => {
-    set(e.target.value);
+    setPosition(e.target.value);
   });
+
+  const updateFromPointer = (clientX) => {
+    const rect = wrap.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percent = (x / rect.width) * 100;
+    setPosition(percent);
+  };
+
+  let dragging = false;
+
+  wrap.addEventListener("pointerdown", (e) => {
+    dragging = true;
+    updateFromPointer(e.clientX);
+  });
+
+  wrap.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    updateFromPointer(e.clientX);
+  });
+
+  window.addEventListener("pointerup", () => {
+    dragging = false;
+  });
+});
 
   const moveFromPointer = (clientX) => {
     const rect = wrap.getBoundingClientRect();
