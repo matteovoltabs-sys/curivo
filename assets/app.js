@@ -280,25 +280,6 @@ document.querySelectorAll(".ba").forEach((wrap) => {
   });
 });
 
-/* ===== Carousel navigation ===== */
-(function () {
-  const track = document.getElementById("baTrack");
-  const dotsWrap = document.getElementById("baDots");
-  if (!track || !dotsWrap) return;
-
-  const slides = Array.from(track.querySelectorAll(".ba-slide"));
-  if (slides.length === 0) return;
-
-  let index = 0;
-
-  slides.forEach((_, i) => {
-    const b = document.createElement("button");
-    b.className = "ba-dot" + (i === 0 ? " active" : "");
-    b.type = "button";
-    b.setAttribute("aria-label", `Vai alla slide ${i + 1}`);
-    b.addEventListener("click", () => goTo(i));
-    dotsWrap.appendChild(b);
-  });
 
   const dots = Array.from(dotsWrap.querySelectorAll(".ba-dot"));
 
