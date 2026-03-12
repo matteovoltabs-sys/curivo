@@ -203,7 +203,6 @@ if (form) {
   });
 }
 
-
 /* ===== Before/After slider ===== */
 document.querySelectorAll(".ba").forEach((wrap) => {
   const range = wrap.querySelector(".ba-range");
@@ -213,6 +212,8 @@ document.querySelectorAll(".ba").forEach((wrap) => {
 
   if (!range || !afterWrap || !handle || !divider) return;
 
+  const startValue = Number(wrap.dataset.start || range.value || 55);
+
   const setPosition = (value) => {
     const v = Math.max(0, Math.min(100, Number(value)));
     afterWrap.style.width = `${v}%`;
@@ -221,7 +222,7 @@ document.querySelectorAll(".ba").forEach((wrap) => {
     range.value = v;
   };
 
-  setPosition(range.value || 55);
+  setPosition(startValue);
 
   range.addEventListener("input", (e) => {
     setPosition(e.target.value);
@@ -234,73 +235,29 @@ document.querySelectorAll(".ba").forEach((wrap) => {
     setPosition(percent);
   };
 
-  let dragging = false;
+  let isDragging = false;
 
   wrap.addEventListener("pointerdown", (e) => {
-    dragging = true;
+    isDragging = true;
+    wrap.setPointerCapture?.(e.pointerId);
     updateFromPointer(e.clientX);
   });
 
   wrap.addEventListener("pointermove", (e) => {
-    if (!dragging) return;
-    updateFromPointer(e.clientX);
-  });
-
-  window.addEventListener("pointerup", () => {
-    dragging = false;
-  });
-});
-
-  const moveFromPointer = (clientX) => {
-    const rect = wrap.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const percent = (x / rect.width) * 100;
-    set(percent);
-  };
-
-  let dragging = false;
-
-  wrap.addEventListener("pointerdown", (e) => {
-    dragging = true;
-    moveFromPointer(e.clientX);
-  });
-
-  wrap.addEventListener("pointermove", (e) => {
-    if (!dragging) return;
-    moveFromPointer(e.clientX);
-  });
-
-  window.addEventListener("pointerup", () => {
-    dragging = false;
-  });
-});
-
-  let dragging = false;
-
-  const updateFromPointer = (clientX) => {
-    const rect = wrap.getBoundingClientRect();
-    const x = clientX - rect.left;
-    const percent = (x / rect.width) * 100;
-    set(percent);
-  };
-
-  wrap.addEventListener("pointerdown", (e) => {
-    dragging = true;
-    updateFromPointer(e.clientX);
-    wrap.setPointerCapture(e.pointerId);
-  });
-
-  wrap.addEventListener("pointermove", (e) => {
-    if (!dragging) return;
+    if (!isDragging) return;
     updateFromPointer(e.clientX);
   });
 
   wrap.addEventListener("pointerup", () => {
-    dragging = false;
+    isDragging = false;
   });
 
   wrap.addEventListener("pointercancel", () => {
-    dragging = false;
+    isDragging = false;
+  });
+
+  wrap.addEventListener("pointerleave", () => {
+    if (!isDragging) return;
   });
 });
 
