@@ -220,84 +220,79 @@ Scrivici qui
     </section>
 
     <!-- Results -->
-    <section class="section" id="risultati">
-      <div class="container">
-        <div class="section-head">
-          <h2>Prima e dopo</h2>
-          <p>Swipe/drag: confronta i risultati in modalità makeover.</p>
-        </div>
-
-        <div class="ba-carousel">
-          <button class="ba-nav prev" type="button" aria-label="Slide precedente">‹</button>
-
-          <div class="ba-track" id="baTrack">
-            <!-- SLIDE 1 -->
-            <div class="ba-slide">
-              <div class="ba-title">Smile makeover</div>
-              <div class="ba">
-                <img class="ba-img before" src="/assets/img/before1.jpg" alt="Prima - Smile makeover">
-                <div class="ba-after-wrap">
-                  <img class="ba-img after" src="/assets/img/after1.jpg" alt="Dopo - Smile makeover">
-                </div>
-                <div class="ba-handle" aria-hidden="true"></div>
-                <input class="ba-range" type="range" min="10" max="90" value="55" aria-label="slider prima e dopo">
-              </div>
-              <div class="ba-meta">
-                <span>Tempo: 5–7 giorni</span>
-                <span>Risparmio: fino al 60%*</span>
-              </div>
-            </div>
-
-            <!-- SLIDE 2 -->
-            <div class="ba-slide">
-              <div class="ba-title">Impianti</div>
-              <div class="ba">
-                <img class="ba-img before" src="/assets/img/before2.jpg" alt="Prima - Impianti">
-                <div class="ba-after-wrap">
-                  <img class="ba-img after" src="/assets/img/after2.jpg" alt="Dopo - Impianti">
-                </div>
-                <div class="ba-handle" aria-hidden="true"></div>
-                <input class="ba-range" type="range" min="10" max="90" value="50" aria-label="slider prima e dopo">
-              </div>
-              <div class="ba-meta">
-                <span>Tempo: 3–5 giorni</span>
-                <span>Piano: su misura</span>
-              </div>
-            </div>
-
-            <!-- SLIDE 3 -->
-            <div class="ba-slide">
-              <div class="ba-title">Faccette</div>
-              <div class="ba">
-                <img class="ba-img before" src="/assets/img/before3.jpg" alt="Prima - Faccette">
-                <div class="ba-after-wrap">
-                  <img class="ba-img after" src="/assets/img/after3.jpg" alt="Dopo - Faccette">
-                </div>
-                <div class="ba-handle" aria-hidden="true"></div>
-                <input class="ba-range" type="range" min="10" max="90" value="60" aria-label="slider prima e dopo">
-              </div>
-              <div class="ba-meta">
-                <span>Tempo: 4–6 giorni</span>
-                <span>Look naturale</span>
-              </div>
-            </div>
-          </div>
-
-          <button class="ba-nav next" type="button" aria-label="Slide successiva">›</button>
-        </div>
-
-        <div class="ba-dots" id="baDots" aria-label="Paginazione carosello"></div>
-
-        <div class="cta-row">
-          <a class="btn" href="#form">Richiedi preventivo</a>
-          <a class="btn ghost" href="#faq">Domande frequenti</a>
-        </div>
-
-        <div class="fineprint" style="margin-top:10px;">
-          *Stime indicative: variano in base al caso clinico.
-        </div>
+    <section id="prima-dopo" class="section alt">
+  <div class="container">
+    <div class="section-head split">
+      <div>
+        <h2>Prima e dopo</h2>
       </div>
-    </section>
+      <p class="section-note">Swipe/drag: confronta i risultati in modalità makeover.</p>
+    </div>
+
+    <div class="ba-grid">
+      <article class="ba-slide">
+        <div class="ba-title">Smile makeover</div>
+
+        <div class="ba">
+          <img class="ba-img before" src="assets/img/before1.png" alt="Prima - Smile makeover">
+          <div class="ba-after-wrap" style="width:55%;">
+            <img class="ba-img after" src="assets/img/after1.png" alt="Dopo - Smile makeover">
+          </div>
+          <div class="ba-handle" style="left:55%;"></div>
+          <input class="ba-range" type="range" min="0" max="100" value="55" aria-label="Confronta prima e dopo Smile makeover">
+        </div>
+
+        <div class="ba-meta">
+          <span>Tempo: 5–7 giorni</span>
+          <span>Risparmio: fino al 60%*</span>
+        </div>
+      </article>
+
+      <article class="ba-slide">
+        <div class="ba-title">Impianti</div>
+
+        <div class="ba">
+          <img class="ba-img before" src="assets/img/before2.png" alt="Prima - Impianti">
+          <div class="ba-after-wrap" style="width:55%;">
+            <img class="ba-img after" src="assets/img/after2.png" alt="Dopo - Impianti">
+          </div>
+          <div class="ba-handle" style="left:55%;"></div>
+          <input class="ba-range" type="range" min="0" max="100" value="55" aria-label="Confronta prima e dopo Impianti">
+        </div>
+
+        <div class="ba-meta">
+          <span>Tempo: 3–5 giorni</span>
+          <span>Piano: su misura</span>
+        </div>
+      </article>
+
+      <article class="ba-slide">
+        <div class="ba-title">Faccette</div>
+
+        <div class="ba">
+          <img class="ba-img before" src="assets/img/before3.png" alt="Prima - Faccette">
+          <div class="ba-after-wrap" style="width:55%;">
+            <img class="ba-img after" src="assets/img/after3.png" alt="Dopo - Faccette">
+          </div>
+          <div class="ba-handle" style="left:55%;"></div>
+          <input class="ba-range" type="range" min="0" max="100" value="55" aria-label="Confronta prima e dopo Faccette">
+        </div>
+
+        <div class="ba-meta">
+          <span>Tempo: 4–6 giorni</span>
+          <span>Look naturale</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#preventivo">Richiedi preventivo</a>
+      <a class="btn btn-secondary" href="#faq">Domande frequenti</a>
+    </div>
+
+    <div class="micro-note">*Stime indicative: variano in base al caso clinico.</div>
+  </div>
+</section>
 
     <!-- Services -->
     <section class="section alt" id="servizi">
@@ -809,6 +804,9 @@ Scrivici qui
   <script src="/assets/app.js"></script>
 </body>
 </html>
+
+
+
 
 
 
