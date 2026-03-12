@@ -68,7 +68,7 @@ function validateTreatment(value) {
   return value.trim() !== "";
 }
 
-<<<<<<< codex/check-page-for-required-improvements
+
 if (!privacy.checked) {
 privacyError.classList.add("show");
 privacyConsent.classList.add("error");
@@ -203,24 +203,53 @@ if (form) {
   });
 }
 
+
 /* ===== Before/After slider ===== */
 document.querySelectorAll(".ba").forEach((wrap) => {
   const range = wrap.querySelector(".ba-range");
   const afterWrap = wrap.querySelector(".ba-after-wrap");
   const handle = wrap.querySelector(".ba-handle");
+  const divider = wrap.querySelector(".ba-divider");
 
-  if (!range || !afterWrap || !handle) return;
+  if (!range || !afterWrap || !handle || !divider) return;
 
   const set = (v) => {
-    const safe = Math.max(10, Math.min(90, Number(v)));
-    afterWrap.style.width = `${safe}%`;
-    handle.style.left = `${safe}%`;
-    range.value = safe;
+    const value = Math.max(0, Math.min(100, Number(v)));
+    afterWrap.style.width = `${value}%`;
+    handle.style.left = `${value}%`;
+    divider.style.left = `${value}%`;
+    range.value = value;
   };
 
-  set(range.value);
+  set(range.value || wrap.dataset.start || 50);
 
-  range.addEventListener("input", (e) => set(e.target.value));
+  range.addEventListener("input", (e) => {
+    set(e.target.value);
+  });
+
+  const moveFromPointer = (clientX) => {
+    const rect = wrap.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percent = (x / rect.width) * 100;
+    set(percent);
+  };
+
+  let dragging = false;
+
+  wrap.addEventListener("pointerdown", (e) => {
+    dragging = true;
+    moveFromPointer(e.clientX);
+  });
+
+  wrap.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    moveFromPointer(e.clientX);
+  });
+
+  window.addEventListener("pointerup", () => {
+    dragging = false;
+  });
+});
 
   let dragging = false;
 
