@@ -1933,7 +1933,7 @@ textarea.input-error{
 .topbar-inner{
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:flex-start;
   gap:24px;
   padding:8px 0;
   flex-wrap:nowrap;
@@ -1944,7 +1944,12 @@ textarea.input-error{
   align-items:center;
   flex:0 1 auto;
   min-width:0;
-  padding-right:96px;
+  padding-right:0;
+}
+
+.nav{
+  flex:1 1 auto;
+  justify-content:center;
 }
 
 .brand-logo{
@@ -1959,7 +1964,6 @@ textarea.input-error{
 .topbar-cta{
   display:flex;
   align-items:center;
-  margin-left:auto;
   flex:0 0 auto;
 }
 
@@ -1979,7 +1983,7 @@ textarea.input-error{
   }
 
   .brand{
-    padding-right:52px;
+    padding-right:0;
   }
 
   .brand-logo{
@@ -1996,7 +2000,7 @@ textarea.input-error{
 
 @media (max-width:640px){
   .brand{
-    padding-right:30px;
+    padding-right:0;
   }
 
   .brand-logo{
