@@ -2045,7 +2045,16 @@ textarea.input-error{
   }
 
   .topbar-cta .btn{
-    padding:8px 11px;
-    font-size:12px;
+    padding:6px 8px;
+    font-size:10.5px;
+    line-height:1.15;
+    max-width:170px;
+    white-space:normal;
+    text-align:center;
+  }
+
+  .topbar-cta{
+    flex:0 1 auto;
+    min-width:0;
   }
 }
