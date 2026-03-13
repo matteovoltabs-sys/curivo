@@ -2044,8 +2044,21 @@ textarea.input-error{
     transform:scale(2);
   }
 
+  .topbar-cta{
+    margin-left:auto;
+    flex:0 1 132px;
+    min-width:0;
+  }
+
   .topbar-cta .btn{
-    padding:8px 11px;
-    font-size:12px;
+    display:block;
+    padding:6px 7px;
+    font-size:10px;
+    line-height:1.2;
+    max-width:132px;
+    border-radius:10px;
+    white-space:normal;
+    text-wrap:balance;
+    text-align:center;
   }
 }
