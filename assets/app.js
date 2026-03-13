@@ -68,28 +68,16 @@ function validateTreatment(value) {
   return value.trim() !== "";
 }
 
-
-if (!privacy.checked) {
-privacyError.classList.add("show");
-privacyConsent.classList.add("error");
-return false;
-}
-=======
 function validatePrivacy() {
   const privacy = document.getElementById("privacyCheck");
   const privacyError = document.getElementById("privacyError");
   const privacyConsent = document.getElementById("privacyConsent");
-
-  if (!privacy || !privacyError || !privacyConsent) {
-    return true;
-  }
 
   if (!privacy.checked) {
     privacyError.classList.add("show");
     privacyConsent.classList.add("error");
     return false;
   }
->>>>>>> main
 
   privacyError.classList.remove("show");
   privacyConsent.classList.remove("error");
@@ -99,10 +87,10 @@ function validatePrivacy() {
 function validateForm() {
   clearAllErrors();
 
-  const name = document.getElementById("name").value;
-  const phone = document.getElementById("phone").value;
-  const email = document.getElementById("email").value;
-  const treatment = document.getElementById("treatment").value;
+  const name = document.getElementById("name")?.value || "";
+  const phone = document.getElementById("phone")?.value || "";
+  const email = document.getElementById("email")?.value || "";
+  const treatment = document.getElementById("treatment")?.value || "";
 
   let isValid = true;
 
@@ -133,6 +121,7 @@ function validateForm() {
   return isValid;
 }
 
+/* Form */
 if (form) {
   const liveFields = ["name", "phone", "email", "treatment"];
 
@@ -148,7 +137,9 @@ if (form) {
     });
 
     field.addEventListener("change", () => {
-      if (fieldId === "treatment" && validateTreatment(field.value)) clearFieldError("treatment");
+      if (fieldId === "treatment" && validateTreatment(field.value)) {
+        clearFieldError("treatment");
+      }
     });
   });
 
@@ -156,10 +147,8 @@ if (form) {
   if (privacy) {
     privacy.addEventListener("change", () => {
       if (privacy.checked) {
-        const privacyError = document.getElementById("privacyError");
-        const privacyConsent = document.getElementById("privacyConsent");
-        if (privacyError) privacyError.classList.remove("show");
-        if (privacyConsent) privacyConsent.classList.remove("error");
+        document.getElementById("privacyError")?.classList.remove("show");
+        document.getElementById("privacyConsent")?.classList.remove("error");
       }
     });
   }
@@ -193,6 +182,7 @@ if (form) {
       clearAllErrors();
       setMsg("ok", "Il tuo preventivo è in arrivo.");
     } catch (error) {
+      console.error("Errore submit form:", error);
       setMsg("err", "Errore nell'invio. Riprova oppure contattaci su WhatsApp.");
     } finally {
       if (submitButton) {
@@ -203,7 +193,7 @@ if (form) {
   });
 }
 
-/* ===== Before/After slider ===== */
+/* Before/After slider */
 document.querySelectorAll(".ba").forEach((wrap) => {
   const range = wrap.querySelector(".ba-range");
   const afterWrap = wrap.querySelector(".ba-after-wrap");
@@ -239,7 +229,9 @@ document.querySelectorAll(".ba").forEach((wrap) => {
 
   wrap.addEventListener("pointerdown", (e) => {
     isDragging = true;
-    wrap.setPointerCapture?.(e.pointerId);
+    try {
+      wrap.setPointerCapture(e.pointerId);
+    } catch (err) {}
     updateFromPointer(e.clientX);
   });
 
@@ -255,88 +247,22 @@ document.querySelectorAll(".ba").forEach((wrap) => {
   wrap.addEventListener("pointercancel", () => {
     isDragging = false;
   });
-
-  wrap.addEventListener("pointerleave", () => {
-    if (!isDragging) return;
-  });
 });
 
-
-  const dots = Array.from(dotsWrap.querySelectorAll(".ba-dot"));
-
-  function goTo(i) {
-    index = Math.max(0, Math.min(i, slides.length - 1));
-    slides[index].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
-    dots.forEach((d, di) => d.classList.toggle("active", di === index));
-  }
-
-  document.querySelector(".ba-nav.prev")?.addEventListener("click", () => goTo(index - 1));
-  document.querySelector(".ba-nav.next")?.addEventListener("click", () => goTo(index + 1));
-
-  track.addEventListener("scroll", () => {
-    const left = track.scrollLeft;
-    let best = 0;
-    let bestDist = Infinity;
-
-    slides.forEach((s, i) => {
-      const dist = Math.abs(s.offsetLeft - left);
-      if (dist < bestDist) {
-        bestDist = dist;
-        best = i;
-      }
-    });
-
-    if (best !== index) {
-      index = best;
-      dots.forEach((d, di) => d.classList.toggle("active", di === index));
-    }
-  }, { passive: true });
-})();
-
-/* ===== Popup ===== */
-const POPUP_STORAGE_KEY = "curivo_popup_closed";
-
-function closePopup() {
+/* Popup */
+setTimeout(() => {
   const popup = document.getElementById("popup");
-  if (!popup) return;
-
-  popup.style.display = "none";
-
-  try {
-    localStorage.setItem(POPUP_STORAGE_KEY, "1");
-  } catch (_) {}
-}
-
-function canShowPopup() {
-  try {
-    return localStorage.getItem(POPUP_STORAGE_KEY) !== "1";
-  } catch (_) {
-    return true;
-  }
-}
-
-setTimeout(function () {
-  const popup = document.getElementById("popup");
-  if (!popup || !canShowPopup()) return;
-  popup.style.display = "block";
+  if (popup) popup.style.display = "block";
 }, 15000);
 
-document.getElementById("closePopup")?.addEventListener("click", function () {
-  closePopup();
+document.getElementById("closePopup")?.addEventListener("click", () => {
+  const popup = document.getElementById("popup");
+  if (popup) popup.style.display = "none";
 });
 
 document.querySelectorAll(".popup-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
-    closePopup();
+    const popup = document.getElementById("popup");
+    if (popup) popup.style.display = "none";
   });
-});
-
-document.getElementById("popup")?.addEventListener("click", (event) => {
-  if (event.target.id === "popup") closePopup();
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key !== "Escape") return;
-  const popup = document.getElementById("popup");
-  if (popup?.style.display === "block") closePopup();
 });
