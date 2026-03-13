@@ -1931,6 +1931,7 @@ textarea.input-error{
   align-items:center;
   flex:0 1 auto;
   min-width:0;
+  padding-right:96px;
 }
 
 .brand-logo{
@@ -1938,6 +1939,8 @@ textarea.input-error{
   width:auto;
   height:112px;
   max-width:none;
+  transform:scale(2);
+  transform-origin:left center;
 }
 
 .topbar-cta{
@@ -1962,8 +1965,13 @@ textarea.input-error{
     gap:10px;
   }
 
+  .brand{
+    padding-right:52px;
+  }
+
   .brand-logo{
     height:78px;
+    transform:scale(2);
   }
 
   .topbar-cta .btn{
@@ -1974,8 +1982,13 @@ textarea.input-error{
 }
 
 @media (max-width:640px){
+  .brand{
+    padding-right:30px;
+  }
+
   .brand-logo{
     height:62px;
+    transform:scale(2);
   }
 
   .topbar-cta .btn{
