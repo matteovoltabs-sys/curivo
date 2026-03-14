@@ -2058,3 +2058,43 @@ textarea.input-error{
     min-width:0;
   }
 }
+/* ===== HEADER CTA FIX ===== */
+
+.topbar-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.brand-logo{
+  height:56px;
+  width:auto;
+}
+
+/* riduce solo il bottone */
+.topbar-cta .btn{
+  padding:8px 14px;
+  font-size:14px;
+  font-weight:800;
+  border-radius:12px;
+  line-height:1.2;
+  max-width:220px;
+  text-align:center;
+  white-space:normal;
+}
+
+/* mobile */
+@media (max-width:768px){
+
+  .brand-logo{
+    height:52px;
+  }
+
+  .topbar-cta .btn{
+    padding:7px 12px;
+    font-size:13px;
+    max-width:190px;
+  }
+
+}
