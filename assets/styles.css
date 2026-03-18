@@ -2200,3 +2200,21 @@ textarea.input-error{
     font-size:20px;
   }
 }
+/* ===== HEADER LOGO ENLARGE WITHOUT INCREASING BAR ===== */
+
+.topbar-inner{
+  height:72px; /* blocchiamo altezza barra */
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  height:100%;
+  overflow:visible;
+}
+
+.brand-logo{
+  height:100%;
+  transform:scale(1.35);
+  transform-origin:left center;
+}
