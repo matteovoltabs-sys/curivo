@@ -2218,3 +2218,22 @@ textarea.input-error{
   transform:scale(1.35);
   transform-origin:left center;
 }
+/* ===== LOGO SCALE DESKTOP ===== */
+
+.brand-logo{
+  height:100%;
+  transform:scale(1.35);
+  transform-origin:left center;
+}
+
+
+/* ===== LOGO SCALE MOBILE ===== */
+
+@media (max-width: 768px){
+
+  .brand-logo{
+    transform:scale(1.6);
+    transform-origin:left center;
+  }
+
+}
